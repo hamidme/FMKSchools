@@ -3685,6 +3685,7 @@ return array(
     'Laravel\\Prompts\\Elements\\ElementContract' => $vendorDir . '/laravel/prompts/src/Elements/ElementContract.php',
     'Laravel\\Prompts\\Elements\\Heading' => $vendorDir . '/laravel/prompts/src/Elements/Heading.php',
     'Laravel\\Prompts\\Elements\\KeyValueList' => $vendorDir . '/laravel/prompts/src/Elements/KeyValueList.php',
+    'Laravel\\Prompts\\Elements\\Link' => $vendorDir . '/laravel/prompts/src/Elements/Link.php',
     'Laravel\\Prompts\\Elements\\NumberedList' => $vendorDir . '/laravel/prompts/src/Elements/NumberedList.php',
     'Laravel\\Prompts\\Exceptions\\FormRevertedException' => $vendorDir . '/laravel/prompts/src/Exceptions/FormRevertedException.php',
     'Laravel\\Prompts\\Exceptions\\NonInteractiveValidationException' => $vendorDir . '/laravel/prompts/src/Exceptions/NonInteractiveValidationException.php',
