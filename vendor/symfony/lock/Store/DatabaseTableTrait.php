@@ -46,15 +46,11 @@ trait DatabaseTableTrait
     }
 
     /**
-     * Returns the key name in the database.
-     *
-     * It returns a sha256 hash, if the original key name is longer than 64 chars.
+     * Returns a hashed version of the key.
      */
-    private function getKeyName(Key $key): string
+    private function getHashedKey(Key $key): string
     {
-        $key = (string) $key;
-
-        return \strlen($key) <= 64 ? $key : hash('sha256', $key);
+        return hash('sha256', (string) $key);
     }
 
     private function getUniqueToken(Key $key): string
