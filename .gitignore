@@ -18,7 +18,7 @@
 /public/hot
 /public/static
 /public/storage
-/public/vendor/statamic
+# /public/vendor/statamic — included for shared hosting deployment (no artisan on server)
 /storage/*.key
 # /vendor — included for shared hosting deployment (no Composer on server)
 /storage/pail
