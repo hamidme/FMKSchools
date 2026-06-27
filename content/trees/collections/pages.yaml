@@ -1,3 +1,47 @@
 tree:
   -
     entry: home
+  -
+    entry: about
+    children:
+      -
+        entry: about-our-story
+      -
+        entry: about-leadership
+      -
+        entry: about-faculty-staff
+      -
+        entry: about-facilities
+  -
+    entry: academics
+    children:
+      -
+        entry: early-years
+      -
+        entry: primary
+      -
+        entry: secondary
+      -
+        entry: curriculum
+  -
+    entry: admissions
+    children:
+      -
+        entry: apply
+      -
+        entry: fees
+      -
+        entry: open-day
+  -
+    entry: student-life
+    children:
+      -
+        entry: clubs
+      -
+        entry: sports
+      -
+        entry: achievements
+  -
+    entry: news
+  -
+    entry: contact

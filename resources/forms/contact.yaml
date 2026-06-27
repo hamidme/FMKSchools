@@ -1,0 +1,49 @@
+title: 'Contact Us'
+email:
+  -
+    to: 'info@fmkschools.edu.ng'
+    from: '{{ config:mail.from.address }}'
+    reply_to: '{{ email }}'
+    subject: 'New Enquiry: {{ subject }}'
+    html: 'email.contact'
+fields:
+  -
+    handle: name
+    field:
+      type: text
+      display: 'Full Name'
+      validate:
+        - required
+  -
+    handle: email
+    field:
+      type: text
+      display: 'Email Address'
+      input_type: email
+      validate:
+        - required
+        - email
+  -
+    handle: phone
+    field:
+      type: text
+      display: 'Phone Number'
+  -
+    handle: subject
+    field:
+      type: select
+      display: Subject
+      options:
+        admissions: 'Admissions Enquiry'
+        fees: 'Fees & Payments'
+        academics: 'Academic Matters'
+        general: 'General Enquiry'
+      validate:
+        - required
+  -
+    handle: message
+    field:
+      type: textarea
+      display: Message
+      validate:
+        - required

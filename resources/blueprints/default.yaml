@@ -1,6 +1,18 @@
 title: Default
 fields:
   -
+    handle: seo_title
+    field:
+      type: text
+      display: 'SEO Title'
+      instructions: 'Overrides the page title in search results. Keep under 60 characters.'
+  -
+    handle: seo_description
+    field:
+      type: textarea
+      display: 'SEO Description'
+      instructions: 'Shown in search results under the title. Keep between 120–160 characters.'
+  -
     handle: content
     field:
       type: markdown

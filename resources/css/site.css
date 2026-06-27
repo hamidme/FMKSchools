@@ -2,3 +2,11 @@
 @plugin "@tailwindcss/typography";
 @source "../views";
 @source "../../content";
+
+@theme {
+    --color-brand-purple: #2D2B8F;
+    --color-brand-gold: #F5C518;
+    --color-brand-crimson: #CC1F1F;
+    --font-display: 'Raleway', system-ui, sans-serif;
+    --font-sans: 'DM Sans', system-ui, sans-serif;
+}

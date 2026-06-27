@@ -1,0 +1,69 @@
+title: 'Header Menu'
+tree:
+  - id: 0554c29c-00fa-47e0-b9f5-2e05e4fe4239
+    title: 'About FMKS'
+    url: '#'
+    children:
+      - id: 1a2b3c4d-5e6f-4789-8c9d-0e1f2a3b4c5d
+        title: 'Our Story'
+        url: /about/our-story
+      - id: 2b3c4d5e-6f7a-4890-9d0e-1f2a3b4c5d6e
+        title: Leadership
+        url: /about/leadership
+      - id: 3c4d5e6f-7a8b-4901-ae1f-2a3b4c5d6e7f
+        title: 'Faculty & Staff'
+        url: /about/faculty
+      - id: 4d5e6f7a-8b9c-4012-bf2a-3b4c5d6e7f8a
+        title: 'Our Facilities'
+        url: /about/facilities
+  - id: c839602a-ed2f-42ed-be00-f8deccfc0515
+    title: Academics
+    url: '#'
+    children:
+      - id: 5e6f7a8b-9c0d-4123-8b3c-4d5e6f7a8b9c
+        title: 'Early Years (Creche-KG)'
+        url: /academics/early-years
+      - id: 6f7a8b9c-0d1e-4234-9c4d-5e6f7a8b9c0d
+        title: 'Primary School (Pry 1-6)'
+        url: /academics/primary
+      - id: 7a8b9c0d-1e2f-4345-ad5e-6f7a8b9c0d1e
+        title: 'Secondary School (JSS & SSS)'
+        url: /academics/secondary
+      - id: 8b9c0d1e-2f3a-4456-be6f-7a8b9c0d1e2f
+        title: 'Our Curriculum'
+        url: /academics/curriculum
+  - id: f04e7a5f-b9f2-4594-8e7c-d1d79f51b4a3
+    title: Admissions
+    url: '#'
+    children:
+      - id: 9c0d1e2f-3a4b-4567-8f7a-8b9c0d1e2f3a
+        title: 'How to Apply'
+        url: /admissions/apply
+      - id: 0d1e2f3a-4b5c-4678-9a8b-9c0d1e2f3a4b
+        title: 'Fees & Scholarships'
+        url: /admissions/fees
+      - id: 1e2f3a4b-5c6d-4789-ab9c-0d1e2f3a4b5c
+        title: 'Open Day'
+        url: /admissions/open-day
+  - id: 2f3a4b5c-6d7e-4890-bc0d-1e2f3a4b5c6d
+    title: 'Student Life'
+    url: '#'
+    children:
+      - id: 3a4b5c6d-7e8f-4901-cd1e-2f3a4b5c6d7e
+        title: 'Clubs & Societies'
+        url: /student-life/clubs
+      - id: 4b5c6d7e-8f9a-4012-de2f-3a4b5c6d7e8f
+        title: Sports
+        url: /student-life/sports
+      - id: 5c6d7e8f-9a0b-4123-ef3a-4b5c6d7e8f9a
+        title: Achievements
+        url: /student-life/achievements
+  - id: 6d7e8f9a-0b1c-4234-f04b-5c6d7e8f9a0b
+    title: 'News & Events'
+    url: /news
+  - id: 9a0b1c2d-3e4f-4567-237e-8f9a0b1c2d3e
+    title: 'Gallery'
+    url: 'https://www.facebook.com/fmkschools/photos'
+  - id: 8f9a0b1c-2d3e-4456-126d-7e8f9a0b1c2d
+    title: 'Contact Us'
+    url: /contact

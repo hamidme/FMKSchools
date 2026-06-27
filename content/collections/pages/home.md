@@ -1,8 +1,11 @@
 ---
-title: Home
 id: home
-template: home
 blueprint: pages
+title: 'Welcome to FMKSchools'
+template: home
+author: 62c62e94-ffe7-478c-b71f-e95b34ecfbcf
+updated_by: 62c62e94-ffe7-478c-b71f-e95b34ecfbcf
+updated_at: 1782372918
 ---
 ## Welcome to your brand new Statamic site!
 

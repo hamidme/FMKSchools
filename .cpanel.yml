@@ -1,0 +1,8 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/fmkschoo/public_html/
+    - /bin/cp -R . $DEPLOYPATH
+    - cd $DEPLOYPATH && php artisan config:cache
+    - cd $DEPLOYPATH && php artisan statamic:stache:clear
+    - cd $DEPLOYPATH && php artisan statamic:stache:warm

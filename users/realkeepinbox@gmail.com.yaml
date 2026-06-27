@@ -2,3 +2,7 @@ name: Abdulhamid
 super: true
 id: 62c62e94-ffe7-478c-b71f-e95b34ecfbcf
 password_hash: $2y$12$bRh5GjXfoG38/258Ehci4OR3alUfTz6jxOPXuouM1m1itZlQsOVUO
+preferences:
+  collections:
+    pages:
+      view: tree

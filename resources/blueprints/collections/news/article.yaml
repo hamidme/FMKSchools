@@ -1,0 +1,64 @@
+title: Article
+fields:
+  -
+    handle: title
+    field:
+      type: text
+      display: Title
+      validate:
+        - required
+  -
+    handle: type
+    field:
+      type: select
+      display: Type
+      options:
+        news: News
+        event: Event
+      default: news
+      validate:
+        - required
+  -
+    handle: excerpt
+    field:
+      type: textarea
+      display: Excerpt
+      instructions: 'Short summary shown on the listing page.'
+      validate:
+        - required
+  -
+    handle: featured_image
+    field:
+      type: assets
+      display: 'Featured Image'
+      container: assets
+      max_files: 1
+  -
+    handle: content
+    field:
+      type: markdown
+      display: Content
+  -
+    handle: event_date
+    field:
+      type: date
+      display: 'Event Date'
+      instructions: 'Only fill in for Event type posts.'
+  -
+    handle: event_location
+    field:
+      type: text
+      display: 'Event Location'
+      instructions: 'e.g. School Hall, Main Field'
+  -
+    handle: seo_title
+    field:
+      type: text
+      display: 'SEO Title'
+      instructions: 'Overrides the page title in search results. Keep under 60 characters.'
+  -
+    handle: seo_description
+    field:
+      type: textarea
+      display: 'SEO Description'
+      instructions: 'Shown in search results. Keep between 120–160 characters. Falls back to Excerpt if left blank.'

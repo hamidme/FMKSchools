@@ -1,0 +1,10 @@
+title: 'News & Events'
+route: 'news/{slug}'
+template: news/show
+date: true
+date_behavior:
+  past: public
+  future: public
+sort_dir: desc
+blueprints:
+  - news/article

@@ -1,0 +1,31 @@
+{{# Shared sibling nav for all /about/* pages #}}
+<div class="sticky top-[65px] z-40 bg-white border-b border-zinc-100 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <nav class="flex items-center overflow-x-auto scrollbar-none">
+            <a href="/about"
+               class="flex-shrink-0 px-4 py-4 text-xs font-bold text-zinc-400 hover:text-[#2D2B8F] uppercase tracking-widest transition-colors mr-2 border-r border-zinc-100 pr-4">
+                About
+            </a>
+            <a href="/about/our-story"
+               class="flex-shrink-0 px-5 py-4 text-sm font-semibold border-b-2 transition-all
+                      {{ segment_2 == 'our-story' ? 'text-[#2D2B8F] border-[#2D2B8F]' : 'text-zinc-500 border-transparent hover:text-[#2D2B8F] hover:border-[#2D2B8F]' }}">
+                Our Story
+            </a>
+            <a href="/about/leadership"
+               class="flex-shrink-0 px-5 py-4 text-sm font-semibold border-b-2 transition-all
+                      {{ segment_2 == 'leadership' ? 'text-[#2D2B8F] border-[#2D2B8F]' : 'text-zinc-500 border-transparent hover:text-[#2D2B8F] hover:border-[#2D2B8F]' }}">
+                Leadership
+            </a>
+            <a href="/about/faculty-staff"
+               class="flex-shrink-0 px-5 py-4 text-sm font-semibold border-b-2 transition-all
+                      {{ segment_2 == 'faculty-staff' ? 'text-[#2D2B8F] border-[#2D2B8F]' : 'text-zinc-500 border-transparent hover:text-[#2D2B8F] hover:border-[#2D2B8F]' }}">
+                Faculty &amp; Staff
+            </a>
+            <a href="/about/facilities"
+               class="flex-shrink-0 px-5 py-4 text-sm font-semibold border-b-2 transition-all
+                      {{ segment_2 == 'facilities' ? 'text-[#2D2B8F] border-[#2D2B8F]' : 'text-zinc-500 border-transparent hover:text-[#2D2B8F] hover:border-[#2D2B8F]' }}">
+                Our Facilities
+            </a>
+        </nav>
+    </div>
+</div>

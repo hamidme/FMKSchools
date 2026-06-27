@@ -1,0 +1,26 @@
+{{# Shared sibling nav for all /student-life/* pages #}}
+<div class="sticky top-[65px] z-40 bg-white border-b border-zinc-100 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <nav class="flex items-center overflow-x-auto scrollbar-none">
+            <a href="/student-life"
+               class="flex-shrink-0 px-4 py-4 text-xs font-bold text-zinc-400 hover:text-[#2D2B8F] uppercase tracking-widest transition-colors mr-2 border-r border-zinc-100 pr-4">
+                Student Life
+            </a>
+            <a href="/student-life/clubs"
+               class="flex-shrink-0 px-5 py-4 text-sm font-semibold border-b-2 transition-all
+                      {{ segment_2 == 'clubs' ? 'text-[#2D2B8F] border-[#2D2B8F]' : 'text-zinc-500 border-transparent hover:text-[#2D2B8F] hover:border-[#2D2B8F]' }}">
+                Clubs &amp; Societies
+            </a>
+            <a href="/student-life/sports"
+               class="flex-shrink-0 px-5 py-4 text-sm font-semibold border-b-2 transition-all
+                      {{ segment_2 == 'sports' ? 'text-[#2D2B8F] border-[#2D2B8F]' : 'text-zinc-500 border-transparent hover:text-[#2D2B8F] hover:border-[#2D2B8F]' }}">
+                Sports
+            </a>
+            <a href="/student-life/achievements"
+               class="flex-shrink-0 px-5 py-4 text-sm font-semibold border-b-2 transition-all
+                      {{ segment_2 == 'achievements' ? 'text-[#2D2B8F] border-[#2D2B8F]' : 'text-zinc-500 border-transparent hover:text-[#2D2B8F] hover:border-[#2D2B8F]' }}">
+                Achievements
+            </a>
+        </nav>
+    </div>
+</div>
