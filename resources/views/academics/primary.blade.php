@@ -41,9 +41,9 @@
                 </h2>
                 <div class="w-12 h-0.5 bg-[#F5C518] rounded mb-8"></div>
                 <div class="space-y-4 text-zinc-600 leading-relaxed">
-                    <p>Our Primary School programme spans six years (Primary 1–6) and is designed to give every child a solid grounding in literacy, numeracy, and critical thinking — the three pillars on which all future academic success is built.</p>
+                    <p>Our Primary School programme spans five years (Basic 1–5) and is designed to give every child a solid grounding in literacy, numeracy, and critical thinking — the three pillars on which all future academic success is built.</p>
                     <p>Teaching is interactive and inquiry-based. We move away from rote learning toward understanding, application, and discovery. Our teachers guide children to ask questions, solve problems, and express themselves clearly and confidently.</p>
-                    <p>By Primary 6, our students are fully prepared for the Common Entrance examination and the demands of a rigorous secondary education.</p>
+                    <p>By Basic 5, our students are fully prepared for the Common Entrance examination and the demands of a rigorous secondary education.</p>
                 </div>
             </div>
             <div class="relative">
@@ -53,8 +53,8 @@
                          onerror="this.style.display='none'"/>
                 </div>
                 <div class="absolute -bottom-5 -left-5 bg-[#F5C518] rounded-2xl px-6 py-4 shadow-lg">
-                    <p class="font-['Raleway'] text-2xl font-bold text-zinc-900">Pry 1–6</p>
-                    <p class="text-xs font-bold text-zinc-700 uppercase tracking-wider">6 Year Programme</p>
+                    <p class="font-['Raleway'] text-2xl font-bold text-zinc-900">Basic 1–5</p>
+                    <p class="text-xs font-bold text-zinc-700 uppercase tracking-wider">5 Year Programme</p>
                 </div>
             </div>
         </div>
@@ -114,19 +114,19 @@
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
             <div class="bg-[#2D2B8F]/5 border border-[#2D2B8F]/10 rounded-3xl p-8">
-                <span class="text-[#2D2B8F] font-bold text-xs uppercase tracking-widest">Pry 1–2</span>
+                <span class="text-[#2D2B8F] font-bold text-xs uppercase tracking-widest">Basic 1–2</span>
                 <h3 class="font-['Raleway'] text-lg font-bold text-zinc-900 mt-2 mb-3">Foundation Stage</h3>
                 <div class="w-8 h-0.5 bg-[#F5C518] rounded mb-4"></div>
                 <p class="text-zinc-600 text-sm leading-relaxed">Solidifying reading, handwriting, and number fluency. Building classroom habits and a love for learning through short, engaging lessons.</p>
             </div>
             <div class="bg-[#F5C518]/10 border border-[#F5C518]/20 rounded-3xl p-8">
-                <span class="text-[#2D2B8F] font-bold text-xs uppercase tracking-widest">Pry 3–4</span>
+                <span class="text-[#2D2B8F] font-bold text-xs uppercase tracking-widest">Basic 3–4</span>
                 <h3 class="font-['Raleway'] text-lg font-bold text-zinc-900 mt-2 mb-3">Development Stage</h3>
                 <div class="w-8 h-0.5 bg-[#F5C518] rounded mb-4"></div>
                 <p class="text-zinc-600 text-sm leading-relaxed">Deepening subject knowledge, introducing essay writing, fractions, and project-based learning. Growing independence and critical thinking.</p>
             </div>
             <div class="bg-[#2D2B8F] rounded-3xl p-8">
-                <span class="text-[#F5C518] font-bold text-xs uppercase tracking-widest">Pry 5–6</span>
+                <span class="text-[#F5C518] font-bold text-xs uppercase tracking-widest">Basic 5</span>
                 <h3 class="font-['Raleway'] text-lg font-bold text-white mt-2 mb-3">Excellence Stage</h3>
                 <div class="w-8 h-0.5 bg-[#F5C518] rounded mb-4"></div>
                 <p class="text-white/65 text-sm leading-relaxed">Intensive Common Entrance preparation, mock exams, and FMKS's own internal promotion assessments to ensure readiness for JSS 1.</p>
