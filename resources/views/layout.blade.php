@@ -323,7 +323,7 @@
                         <h3 class="text-xs font-bold uppercase tracking-widest text-[#F5C518] mb-5">Academics</h3>
                         <ul class="space-y-2.5">
                             <li><a href="/academics/early-years" class="text-sm text-white/55 hover:text-white transition-colors flex items-center gap-1.5"><span class="text-[#F5C518]/50 text-xs">›</span> Early Years (Crèche–KG)</a></li>
-                            <li><a href="/academics/primary" class="text-sm text-white/55 hover:text-white transition-colors flex items-center gap-1.5"><span class="text-[#F5C518]/50 text-xs">›</span> Primary School (Pry 1–6)</a></li>
+                            <li><a href="/academics/primary" class="text-sm text-white/55 hover:text-white transition-colors flex items-center gap-1.5"><span class="text-[#F5C518]/50 text-xs">›</span> Primary School (Basic 1–5)</a></li>
                             <li><a href="/academics/secondary" class="text-sm text-white/55 hover:text-white transition-colors flex items-center gap-1.5"><span class="text-[#F5C518]/50 text-xs">›</span> Junior Secondary (JSS 1–3)</a></li>
                             <li><a href="/academics/secondary" class="text-sm text-white/55 hover:text-white transition-colors flex items-center gap-1.5"><span class="text-[#F5C518]/50 text-xs">›</span> Senior Secondary (SSS 1–3)</a></li>
                             <li><a href="/academics/curriculum" class="text-sm text-white/55 hover:text-white transition-colors flex items-center gap-1.5"><span class="text-[#F5C518]/50 text-xs">›</span> Our Curriculum</a></li>
@@ -358,7 +358,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                           d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                                 </svg>
-                                <a href="mailto:info@fmkschools.edu.ng"
+                                <a href="mailto:info@fmkschools.ng"
                                    class="text-sm text-white/55 hover:text-white transition-colors">info@fmkschools.ng</a>
                             </li>
                         </ul>

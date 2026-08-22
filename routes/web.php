@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('home', [
-        'latestNews' => NewsPost::orderByDesc('published_at')->limit(3)->get(),
+        'latestNews' => NewsPost::published()->orderByDesc('published_at')->limit(3)->get(),
     ]);
 })->name('home');
 
@@ -35,14 +35,15 @@ Route::view('/student-life/achievements', 'student-life.achievements')->name('st
 
 Route::get('/news', function () {
     return view('news.index', [
-        'posts' => NewsPost::orderByDesc('published_at')->get(),
+        'posts' => NewsPost::published()->orderByDesc('published_at')->get(),
     ]);
 })->name('news.index');
 
 Route::get('/news/{news_post:slug}', function (NewsPost $news_post) {
     return view('news.show', [
         'post' => $news_post,
-        'related' => NewsPost::where('id', '!=', $news_post->id)
+        'related' => NewsPost::published()
+            ->where('id', '!=', $news_post->id)
             ->orderByDesc('published_at')
             ->limit(3)
             ->get(),
@@ -74,7 +75,7 @@ Route::get('/sitemap.xml', function () {
     ];
 
     // Add news entries dynamically
-    $newsPosts = NewsPost::query()->get();
+    $newsPosts = NewsPost::published()->get();
     foreach ($newsPosts as $post) {
         $pages[] = [
             'url'        => route('news.show', $post, absolute: false),
