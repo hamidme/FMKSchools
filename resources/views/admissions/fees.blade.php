@@ -180,7 +180,8 @@
                 <div class="bg-zinc-50 border border-zinc-100 rounded-3xl p-7">
                     <h3 class="font-['Raleway'] font-bold text-zinc-900 mb-2">Sibling Discount</h3>
                     <div class="w-8 h-0.5 bg-[#F5C518] rounded mb-3"></div>
-                    <p class="text-zinc-500 text-sm leading-relaxed">Families with two or more children enrolled at FMKS receive a 10% discount on fees for the third child and beyond.</p>
+                    <p class="text-zinc-500 text-sm leading-relaxed">Sibling discount applies to families with three (3) or more children enrolled at FMKS.</p>
+                    <p class="text-zinc-500 text-sm leading-relaxed">A 50% discount is applied on tuition fees only of the child in the highest class.</p>
                 </div>
             </div>
         </div>

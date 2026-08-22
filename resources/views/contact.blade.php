@@ -43,7 +43,7 @@
                             </div>
                             <div>
                                 <p class="font-semibold text-zinc-900 text-sm mb-1">Address</p>
-                                <p class="text-zinc-500 text-sm leading-relaxed">123 School Road, Surulere,<br>Lagos State, Nigeria</p>
+                                <p class="text-zinc-500 text-sm leading-relaxed"><strong>Future Model of Knowledge Schools (FMKS)</strong> <br> Ibukun Oluwa Avenue, <br>behind NECO office, <br> Osogbo, Osun State, Nigeria.</p>
                             </div>
                         </div>
 
@@ -53,8 +53,9 @@
                             </div>
                             <div>
                                 <p class="font-semibold text-zinc-900 text-sm mb-1">Phone</p>
-                                <a href="tel:+2348012345678" class="text-zinc-500 text-sm hover:text-[#2D2B8F] transition-colors">+234 801 234 5678</a><br>
-                                <a href="tel:+2348087654321" class="text-zinc-500 text-sm hover:text-[#2D2B8F] transition-colors">+234 808 765 4321</a>
+                                <a href="tel:+234 703 571 9683" class="text-zinc-500 text-sm hover:text-[#2D2B8F] transition-colors">+234 703 571 9683</a><br>
+                                <a href="tel:+234 802 973 4529" class="text-zinc-500 text-sm hover:text-[#2D2B8F] transition-colors">+234 802 973 4529</a><br>
+                                <a href="tel:+234 902 722 1475" class="text-zinc-500 text-sm hover:text-[#2D2B8F] transition-colors">+234 902 722 1475</a>
                             </div>
                         </div>
 
@@ -64,8 +65,8 @@
                             </div>
                             <div>
                                 <p class="font-semibold text-zinc-900 text-sm mb-1">Email</p>
-                                <a href="mailto:info@fmkschools.edu.ng" class="text-zinc-500 text-sm hover:text-[#2D2B8F] transition-colors">info@fmkschools.edu.ng</a><br>
-                                <a href="mailto:admissions@fmkschools.edu.ng" class="text-zinc-500 text-sm hover:text-[#2D2B8F] transition-colors">admissions@fmkschools.edu.ng</a>
+                                <a href="mailto:info@fmkschools.edu.ng" class="text-zinc-500 text-sm hover:text-[#2D2B8F] transition-colors">info@fmkschools.ng</a><br>
+                                <a href="mailto:admissions@fmkschools.edu.ng" class="text-zinc-500 text-sm hover:text-[#2D2B8F] transition-colors">admissions@fmkschools.ng</a>
                             </div>
                         </div>
 

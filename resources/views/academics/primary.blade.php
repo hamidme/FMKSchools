@@ -17,7 +17,7 @@
             <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
             <span class="text-white/60">Primary School</span>
         </nav>
-        <span class="text-[#F5C518] text-xs font-bold uppercase tracking-widest mb-4 block">Primary 1 — Primary 6</span>
+        <span class="text-[#F5C518] text-xs font-bold uppercase tracking-widest mb-4 block">Basic 1 — Basic 5</span>
         <h1 class="font-['Raleway'] text-4xl sm:text-5xl font-bold text-white leading-tight mb-4">Primary School</h1>
         <p class="text-white/60 max-w-xl leading-relaxed">Building the academic foundations that will carry every child through secondary school and beyond.</p>
     </div>

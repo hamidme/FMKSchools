@@ -57,22 +57,29 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center justify-between flex-wrap gap-2">
                 <div class="flex items-center gap-4 flex-wrap">
                     <span>📞 School Families:
-                        <a href="tel:+2348000000000"
+                        <a href="tel:+234 703 571 9683"
                            class="underline underline-offset-2 hover:text-[#F5C518] transition-colors">
-                            +234 800 000 0000
+                            +234 703 571 9683
                         </a>
                     </span>
                     <span class="text-white/30">|</span>
                     <span>New Admissions:
-                        <a href="tel:+2348000000001"
+                        <a href="tel:+234 802 973 4529"
                            class="underline underline-offset-2 hover:text-[#F5C518] transition-colors">
-                            +234 800 000 0001
+                            +234 802 973 4529
+                        </a>
+                    </span>
+                    <span class="text-white/30">|</span>
+                    <span>General Enquiry:
+                        <a href="tel:+234 902 722 1475"
+                           class="underline underline-offset-2 hover:text-[#F5C518] transition-colors">
+                            +234 902 722 1475
                         </a>
                     </span>
                 </div>
                 <a href="/admissions"
                    class="bg-[#F5C518] text-zinc-900 font-bold px-3 py-0.5 rounded-full text-xs hover:bg-yellow-300 transition-colors tracking-wider uppercase">
-                    Apply for 2025/2026 ›
+                    Apply for 2026/2027 ›
                 </a>
             </div>
         </div>
@@ -335,7 +342,7 @@
                                           d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
                                 </svg>
                                 <span class="text-sm text-white/55 leading-relaxed">
-                                    123 School Road,<br/>Lagos State, Nigeria
+                                    Ibukun Oluwa Avenue, <br>behind NECO office, <br> Osogbo, Osun State, Nigeria.
                                 </span>
                             </li>
                             <li class="flex items-center gap-3">
@@ -343,8 +350,8 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                           d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
                                 </svg>
-                                <a href="tel:+2348000000000"
-                                   class="text-sm text-white/55 hover:text-white transition-colors">+234 800 000 0000</a>
+                                <a href="tel:+234 703 571 9683"
+                                   class="text-sm text-white/55 hover:text-white transition-colors">+234 703 571 9683</a>
                             </li>
                             <li class="flex items-center gap-3">
                                 <svg class="w-4 h-4 text-[#F5C518] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -352,13 +359,13 @@
                                           d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                                 </svg>
                                 <a href="mailto:info@fmkschools.edu.ng"
-                                   class="text-sm text-white/55 hover:text-white transition-colors">info@fmkschools.edu.ng</a>
+                                   class="text-sm text-white/55 hover:text-white transition-colors">info@fmkschools.ng</a>
                             </li>
                         </ul>
                         <div class="mt-5 p-4 rounded-2xl bg-white/5 border border-white/10">
                             <p class="text-[10px] text-[#F5C518] font-bold uppercase tracking-wider mb-1">Admissions Enquiry</p>
-                            <a href="tel:+2348000000001"
-                               class="text-sm text-white/80 hover:text-white font-semibold transition-colors">+234 800 000 0001</a>
+                            <a href="tel:+234 802 973 4529"
+                               class="text-sm text-white/80 hover:text-white font-semibold transition-colors">+234 802 973 4529</a>
                         </div>
                     </div>
 
@@ -385,7 +392,8 @@
              class="fixed bottom-6 right-6 left-6 flex justify-between items-end z-50 pointer-events-none">
 
             {{-- WhatsApp --}}
-            <a href="https://wa.me/2348012345678"
+            <a href="https://wa.me/2347035719683
+"
                target="_blank" rel="noopener"
                class="pointer-events-auto w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:scale-105 active:scale-95 transition-transform"
                style="background-color:#25d366;"

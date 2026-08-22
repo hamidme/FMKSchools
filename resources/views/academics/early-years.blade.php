@@ -82,7 +82,7 @@
                 <div class="w-12 h-12 rounded-2xl bg-amber-100 flex items-center justify-center mb-5">
                     <svg class="w-6 h-6 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                 </div>
-                <h3 class="font-['Raleway'] font-bold text-zinc-900 mb-1">Nursery 1 &amp; 2</h3>
+                <h3 class="font-['Raleway'] font-bold text-zinc-900 mb-1">Playgroup</h3>
                 <span class="text-[10px] font-bold text-[#2D2B8F] uppercase tracking-wider">2 – 4 years</span>
                 <div class="w-8 h-0.5 bg-[#F5C518] rounded my-3"></div>
                 <p class="text-zinc-500 text-sm leading-relaxed">Early language development, counting, colours, shapes, and social skills through structured play and storytelling.</p>
@@ -91,7 +91,7 @@
                 <div class="w-12 h-12 rounded-2xl bg-emerald-100 flex items-center justify-center mb-5">
                     <svg class="w-6 h-6 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
                 </div>
-                <h3 class="font-['Raleway'] font-bold text-zinc-900 mb-1">Kindergarten 1</h3>
+                <h3 class="font-['Raleway'] font-bold text-zinc-900 mb-1">Nursery</h3>
                 <span class="text-[10px] font-bold text-[#2D2B8F] uppercase tracking-wider">4 – 5 years</span>
                 <div class="w-8 h-0.5 bg-[#F5C518] rounded my-3"></div>
                 <p class="text-zinc-500 text-sm leading-relaxed">Introduction to phonics and letter formation, number work to 20, creative arts, and group activities that build confidence.</p>
@@ -100,7 +100,7 @@
                 <div class="w-12 h-12 rounded-2xl bg-[#F5C518]/20 flex items-center justify-center mb-5">
                     <svg class="w-6 h-6 text-[#F5C518]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
                 </div>
-                <h3 class="font-['Raleway'] font-bold text-white mb-1">Kindergarten 2</h3>
+                <h3 class="font-['Raleway'] font-bold text-white mb-1">Kindergarten</h3>
                 <span class="text-[10px] font-bold text-white/50 uppercase tracking-wider">5 – 6 years</span>
                 <div class="w-8 h-0.5 bg-[#F5C518] rounded my-3"></div>
                 <p class="text-white/65 text-sm leading-relaxed">Full reading readiness, writing sentences, number operations, and smooth transition preparation into Primary 1.</p>
