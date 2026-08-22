@@ -57,24 +57,15 @@ return [
     | providers to represent the model / table. These providers may then
     | be assigned to any extra authentication guards you have defined.
     |
-    | Supported: "statamic", "database", "eloquent"
+    | Supported: "database", "eloquent"
     |
     */
 
     'providers' => [
         'users' => [
-            'driver' => 'statamic',
+            'driver' => 'eloquent',
+            'model' => env('AUTH_MODEL', User::class),
         ],
-
-        // 'users' => [
-        //     'driver' => 'eloquent',
-        //     'model' => env('AUTH_MODEL', User::class),
-        // ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
     ],
 
     /*

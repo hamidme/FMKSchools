@@ -105,11 +105,6 @@ return [
             ],
         ],
 
-        'static_cache' => [
-            'driver' => 'file',
-            'path' => storage_path('statamic/static-urls-cache'),
-        ],
-
     ],
 
     /*

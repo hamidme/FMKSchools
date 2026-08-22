@@ -1,48 +1,37 @@
-<p align="center">
-<picture>
-    <source srcset="https://statamic.com/assets/branding/squircle/statamic-logo-lime-white.svg" media="(prefers-color-scheme: dark)">
-    <img align="center" width="350" alt="Statamic Logo" src="https://statamic.com/assets/branding/squircle/statamic-logo-lime.svg">
-</picture>
-</p>
+# FMK Schools Website
 
-## About Statamic
+The website for Future Model of Knowledge Schools (Lagos, Nigeria), built on Laravel with Filament as the admin panel.
 
-Statamic is the flat-first, Laravel + Git powered CMS designed for building beautiful, easy to manage websites.
+## Stack
 
-> [!NOTE]
-> This repository contains the code for a fresh Statamic project that is installed via the Statamic CLI tool.
->
-> The code for the Statamic Composer package itself can be found at the [Statamic core package repository][cms-repo].
+- Laravel 13 (PHP 8.3)
+- Filament 5 — admin panel at `/admin`, used to manage News & Events posts
+- Blade templates, Tailwind CSS v4, Alpine.js
+- SQLite (dev) — see `.env` for the active connection
 
+## Local setup
 
-## Learning Statamic
+```bash
+composer install
+npm install
+cp .env.example .env
+php artisan key:generate
+php artisan migrate --seed
+php artisan storage:link
+php artisan make:filament-user
+composer dev
+```
 
-Statamic has extensive [documentation][docs]. We dedicate a significant amount of time and energy every day to improving them, so if something is unclear, feel free to open issues for anything you find confusing or incomplete. We are happy to consider anything you feel will make the docs and CMS better.
+`composer dev` runs the Laravel dev server, queue listener, log tailer, and Vite together.
 
-## Support
+## Admin panel
 
-We provide official developer support on [Statamic Pro](https://statamic.com/pricing) projects. Community-driven support is available via [GitHub Discussions](https://github.com/statamic/cms/discussions) and in [Discord][discord].
+Manage News & Events posts at `/admin`. Create an admin login locally with:
 
+```bash
+php artisan make:filament-user
+```
 
-## Contributing
+## Deployment
 
-Thank you for considering contributing to Statamic! We simply ask that you review the [contribution guide][contribution] before you open issues or send pull requests.
-
-
-## Code of Conduct
-
-In order to ensure that the Statamic community is welcoming to all and generally a rad place to belong, please review and abide by the [Code of Conduct](https://github.com/statamic/cms/wiki/Code-of-Conduct).
-
-
-## Important Links
-
-- [Statamic Main Site](https://statamic.com)
-- [Statamic Documentation][docs]
-- [Statamic Core Package Repo][cms-repo]
-- [Statamic Migrator](https://github.com/statamic/migrator)
-- [Statamic Discord][discord]
-
-[docs]: https://statamic.dev/
-[discord]: https://statamic.com/discord
-[contribution]: https://github.com/statamic/cms/blob/master/CONTRIBUTING.md
-[cms-repo]: https://github.com/statamic/cms
+Deployed via cPanel Git Version Control on shared hosting (`.cpanel.yml` defines the deploy tasks: migrate, storage:link, config:cache, view:clear). `vendor/` and `public/build/` are committed to the repo since Composer isn't run on the server.

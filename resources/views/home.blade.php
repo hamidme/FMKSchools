@@ -1,0 +1,959 @@
+@extends('layout')
+
+@section('content')
+{{-- ══════════════════════════════════════════════════════
+    HERO SLIDER
+══════════════════════════════════════════════════════ --}}
+<section
+    x-data="heroSlider()"
+    x-init="init()"
+    @mouseenter="paused = true"
+    @mouseleave="paused = false"
+    class="relative h-[92vh] min-h-[560px] overflow-hidden bg-[#1a1950]"
+>
+
+    {{-- ── Background slides (cross-fade) ── --}}
+    <template x-for="(slide, i) in slides" :key="i">
+        <div
+            x-show="current === i"
+            x-transition:enter="transition-opacity ease-in-out duration-1000"
+            x-transition:enter-start="opacity-0"
+            x-transition:enter-end="opacity-100"
+            x-transition:leave="transition-opacity ease-in-out duration-1000"
+            x-transition:leave-start="opacity-100"
+            x-transition:leave-end="opacity-0"
+            class="absolute inset-0"
+        >
+            <div
+                class="absolute inset-0 bg-cover bg-center bg-no-repeat"
+                :style="'background-image: url(\'' + slide.image + '\')'">
+            </div>
+            {{-- Gradient overlay — heavy on left for text legibility, lighter on right --}}
+            <div class="absolute inset-0 bg-gradient-to-r from-[#1a1950]/90 via-[#2D2B8F]/60 to-[#1a1950]/20"></div>
+        </div>
+    </template>
+
+    {{-- ── Slide text content ── --}}
+    <div class="absolute inset-0 flex items-center z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pb-20">
+            <div
+                x-show="contentVisible"
+                x-cloak
+                x-transition:enter="transition ease-out duration-500"
+                x-transition:enter-start="opacity-0 translate-y-5"
+                x-transition:enter-end="opacity-100 translate-y-0"
+                x-transition:leave="transition ease-in duration-300"
+                x-transition:leave-start="opacity-100 translate-y-0"
+                x-transition:leave-end="opacity-0 -translate-y-3"
+                class="max-w-2xl"
+            >
+                {{-- Tag pill --}}
+                <div class="inline-flex items-center gap-2 bg-[#F5C518]/10 border border-[#F5C518]/25 rounded-full px-4 py-1.5 mb-7">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#F5C518] animate-pulse"></span>
+                    <span class="text-[#F5C518] text-xs font-bold tracking-widest uppercase"
+                          x-text="slides[current].tag"></span>
+                </div>
+
+                <h1
+                    class="font-['Raleway'] text-4xl sm:text-5xl lg:text-6xl text-white font-bold leading-[1.1] mb-6"
+                    x-html="slides[current].headline">
+                </h1>
+
+                <p
+                    class="text-lg text-white/65 max-w-lg leading-relaxed mb-10"
+                    x-text="slides[current].sub">
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a
+                        :href="slides[current].cta1.href"
+                        class="inline-flex items-center justify-center gap-2 bg-[#F5C518] text-zinc-900 font-bold px-8 py-4 rounded-full text-sm hover:bg-yellow-300 active:scale-95 transition-all shadow-lg shadow-[#F5C518]/20"
+                    >
+                        <span x-text="slides[current].cta1.text"></span>
+                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                        </svg>
+                    </a>
+                    <a
+                        :href="slides[current].cta2.href"
+                        class="inline-flex items-center justify-center gap-2 bg-white/10 border border-white/20 text-white font-semibold px-8 py-4 rounded-full text-sm hover:bg-white/20 active:scale-95 transition-all backdrop-blur-sm"
+                    >
+                        <span x-text="slides[current].cta2.text"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- ── Prev / Next arrows ── --}}
+    <button
+        @click="prev()"
+        aria-label="Previous slide"
+        class="absolute left-4 lg:left-8 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white/10 hover:bg-white/25 border border-white/20 flex items-center justify-center text-white backdrop-blur-sm transition-all hover:scale-105 active:scale-95"
+    >
+        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+        </svg>
+    </button>
+    <button
+        @click="next()"
+        aria-label="Next slide"
+        class="absolute right-4 lg:right-8 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white/10 hover:bg-white/25 border border-white/20 flex items-center justify-center text-white backdrop-blur-sm transition-all hover:scale-105 active:scale-95"
+    >
+        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+        </svg>
+    </button>
+
+    {{-- ── Dot indicators ── --}}
+    <div class="absolute bottom-14 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2.5">
+        <template x-for="(slide, i) in slides" :key="'dot-' + i">
+            <button
+                @click="go(i)"
+                :class="current === i ? 'w-7 bg-[#F5C518]' : 'w-2.5 bg-white/40 hover:bg-white/70'"
+                class="h-2.5 rounded-full transition-all duration-300"
+                :aria-label="'Go to slide ' + (i + 1)"
+            ></button>
+        </template>
+    </div>
+
+    {{-- ── Wave to stats strip ── --}}
+    <div class="absolute bottom-0 left-0 right-0 leading-none z-10 pointer-events-none">
+        <svg viewBox="0 0 1440 56" xmlns="http://www.w3.org/2000/svg" class="w-full block">
+            <path d="M0 32C360 56 720 8 1080 32C1260 44 1380 40 1440 36V56H0V32Z" fill="#f4f4f5"/>
+        </svg>
+    </div>
+
+</section>
+
+
+{{-- ══════════════════════════════════════════════════════
+    STATS STRIP
+══════════════════════════════════════════════════════ --}}
+<section class="bg-zinc-100 py-14">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 lg:gap-4 text-center">
+
+            <div x-data="{ count: 0, target: 2005 }"
+                 x-init="
+                     const obs = new IntersectionObserver(([e]) => {
+                         if (!e.isIntersecting) return;
+                         const step = target / (900 / 16);
+                         const t = setInterval(() => {
+                             count = Math.min(Math.ceil(count + step), target);
+                             if (count >= target) clearInterval(t);
+                         }, 16);
+                         obs.disconnect();
+                     }, { threshold: 0.5 });
+                     obs.observe($el);
+                 ">
+                <p class="font-['Raleway'] text-4xl font-bold text-[#2D2B8F]" x-text="count"></p>
+                <p class="text-xs font-bold uppercase tracking-widest text-zinc-500 mt-1">Est. Year</p>
+                <div class="w-8 h-0.5 bg-[#F5C518] rounded mx-auto mt-2"></div>
+            </div>
+
+            <div x-data="{ count: 0, target: 1500 }"
+                 x-init="
+                     const obs = new IntersectionObserver(([e]) => {
+                         if (!e.isIntersecting) return;
+                         const step = target / (900 / 16);
+                         const t = setInterval(() => {
+                             count = Math.min(Math.ceil(count + step), target);
+                             if (count >= target) clearInterval(t);
+                         }, 16);
+                         obs.disconnect();
+                     }, { threshold: 0.5 });
+                     obs.observe($el);
+                 ">
+                <p class="font-['Raleway'] text-4xl font-bold text-[#2D2B8F]">
+                    <span x-text="count.toLocaleString()"></span>+
+                </p>
+                <p class="text-xs font-bold uppercase tracking-widest text-zinc-500 mt-1">Students</p>
+                <div class="w-8 h-0.5 bg-[#F5C518] rounded mx-auto mt-2"></div>
+            </div>
+
+            <div x-data="{ count: 0, target: 120 }"
+                 x-init="
+                     const obs = new IntersectionObserver(([e]) => {
+                         if (!e.isIntersecting) return;
+                         const step = target / (900 / 16);
+                         const t = setInterval(() => {
+                             count = Math.min(Math.ceil(count + step), target);
+                             if (count >= target) clearInterval(t);
+                         }, 16);
+                         obs.disconnect();
+                     }, { threshold: 0.5 });
+                     obs.observe($el);
+                 ">
+                <p class="font-['Raleway'] text-4xl font-bold text-[#2D2B8F]">
+                    <span x-text="count"></span>+
+                </p>
+                <p class="text-xs font-bold uppercase tracking-widest text-zinc-500 mt-1">Qualified Staff</p>
+                <div class="w-8 h-0.5 bg-[#F5C518] rounded mx-auto mt-2"></div>
+            </div>
+
+            <div x-data="{ count: 0, target: 98 }"
+                 x-init="
+                     const obs = new IntersectionObserver(([e]) => {
+                         if (!e.isIntersecting) return;
+                         const step = target / (900 / 16);
+                         const t = setInterval(() => {
+                             count = Math.min(Math.ceil(count + step), target);
+                             if (count >= target) clearInterval(t);
+                         }, 16);
+                         obs.disconnect();
+                     }, { threshold: 0.5 });
+                     obs.observe($el);
+                 ">
+                <p class="font-['Raleway'] text-4xl font-bold text-[#2D2B8F]">
+                    <span x-text="count"></span>%
+                </p>
+                <p class="text-xs font-bold uppercase tracking-widest text-zinc-500 mt-1">WAEC Pass Rate</p>
+                <div class="w-8 h-0.5 bg-[#F5C518] rounded mx-auto mt-2"></div>
+            </div>
+
+            <div x-data="{ count: 0, target: 50 }"
+                 x-init="
+                     const obs = new IntersectionObserver(([e]) => {
+                         if (!e.isIntersecting) return;
+                         const step = target / (900 / 16);
+                         const t = setInterval(() => {
+                             count = Math.min(Math.ceil(count + step), target);
+                             if (count >= target) clearInterval(t);
+                         }, 16);
+                         obs.disconnect();
+                     }, { threshold: 0.5 });
+                     obs.observe($el);
+                 ">
+                <p class="font-['Raleway'] text-4xl font-bold text-[#2D2B8F]">
+                    <span x-text="count"></span>+
+                </p>
+                <p class="text-xs font-bold uppercase tracking-widest text-zinc-500 mt-1">Awards Won</p>
+                <div class="w-8 h-0.5 bg-[#F5C518] rounded mx-auto mt-2"></div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+{{-- ══════════════════════════════════════════════════════
+    ABOUT / MISSION PREVIEW
+══════════════════════════════════════════════════════ --}}
+<section id="about" class="bg-white py-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+            {{-- Text side --}}
+            <div>
+                <span class="inline-block text-[#F5C518] text-xs font-bold uppercase tracking-widest mb-4">Who We Are</span>
+                <h2 class="font-['Raleway'] text-3xl sm:text-4xl font-bold text-zinc-900 leading-snug mb-6">
+                    Shaping Leaders.<br/>
+                    <span class="text-[#2D2B8F]">Lighting Futures.</span>
+                </h2>
+                <div class="w-12 h-1 bg-[#F5C518] rounded mb-7"></div>
+                <p class="text-zinc-600 leading-relaxed mb-5">
+                    Future Model of Knowledge Schools (FMKS) is a forward-thinking educational institution committed to delivering world-class education rooted in Nigerian values. We believe every child carries an extraordinary potential that the right environment can unlock.
+                </p>
+                <p class="text-zinc-600 leading-relaxed mb-8">
+                    Our school is built on three pillars: <strong class="text-zinc-800">Academic Excellence</strong>, <strong class="text-zinc-800">Character Development</strong>, and <strong class="text-zinc-800">Innovation</strong>. Together, they shape confident, compassionate, and competent graduates ready to lead Nigeria and the world.
+                </p>
+
+                <div class="grid grid-cols-2 gap-4 mb-8">
+                    <div class="flex items-start gap-3 p-4 rounded-2xl bg-zinc-50">
+                        <div class="w-8 h-8 rounded-xl bg-[#2D2B8F]/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <svg class="w-4 h-4 text-[#2D2B8F]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-sm font-bold text-zinc-800">Academic Excellence</p>
+                            <p class="text-xs text-zinc-500 mt-0.5">Top results year after year</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3 p-4 rounded-2xl bg-zinc-50">
+                        <div class="w-8 h-8 rounded-xl bg-[#F5C518]/15 flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <svg class="w-4 h-4 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-sm font-bold text-zinc-800">Character & Values</p>
+                            <p class="text-xs text-zinc-500 mt-0.5">Moral foundation for life</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3 p-4 rounded-2xl bg-zinc-50">
+                        <div class="w-8 h-8 rounded-xl bg-[#CC1F1F]/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <svg class="w-4 h-4 text-[#CC1F1F]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-sm font-bold text-zinc-800">Innovation</p>
+                            <p class="text-xs text-zinc-500 mt-0.5">21st-century learning</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3 p-4 rounded-2xl bg-zinc-50">
+                        <div class="w-8 h-8 rounded-xl bg-[#2D2B8F]/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <svg class="w-4 h-4 text-[#2D2B8F]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-sm font-bold text-zinc-800">Community</p>
+                            <p class="text-xs text-zinc-500 mt-0.5">A family that cares</p>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="/about"
+                   class="inline-flex items-center gap-2 bg-[#2D2B8F] text-white font-semibold px-6 py-3 rounded-full text-sm hover:bg-[#3D3AAF] active:scale-95 transition-all shadow-sm">
+                    Learn More About Us
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                    </svg>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div class="rounded-3xl overflow-hidden aspect-[3/4] bg-[#2D2B8F]/10">
+                    <img src="/images/about-main.webp"
+                         alt="Students at FMKS"
+                         class="w-full h-full object-cover"/>
+                </div>
+                <div class="flex flex-col gap-4 pt-8">
+                    <div class="rounded-3xl overflow-hidden aspect-square bg-[#F5C518]/15">
+                        <img src="/images/about-award.webp"
+                             alt="FMKS award ceremony"
+                             class="w-full h-full object-cover"/>
+                    </div>
+                    <div class="rounded-3xl overflow-hidden aspect-square bg-[#CC1F1F]/10">
+                        <img src="/images/about-grad.webp"
+                             alt="FMKS graduation"
+                             class="w-full h-full object-cover"/>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+{{-- ══════════════════════════════════════════════════════
+    PRINCIPAL'S MESSAGE
+══════════════════════════════════════════════════════ --}}
+<section class="bg-[#1a1950] py-20 overflow-hidden" x-data="{ modalOpen: false }">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-[3fr_2fr] gap-12 lg:gap-20 items-center">
+
+            {{-- ── Left: message ── --}}
+            <div>
+                <span class="text-[#F5C518] text-xs font-bold uppercase tracking-widest mb-4 block">
+                    Message from our Principal
+                </span>
+                <h2 class="font-['Raleway'] text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight mb-6">
+                    Welcome to Future Model<br class="hidden sm:block"/> of Knowledge Schools
+                </h2>
+                <div class="space-y-4 text-white/65 leading-relaxed mb-8 max-w-xl">
+                    <p>
+                        I believe that every child carries within them an extraordinary potential — waiting to be discovered, nurtured, and set free. At FMKS, we are committed to creating an environment where that potential is not just recognised, but celebrated.
+                    </p>
+                    <p>
+                        Our school is built on the conviction that true education goes beyond examinations. It shapes character, builds resilience, and lights the path toward a purposeful life. We partner with every family to ensure your child is known, valued, and challenged to grow.
+                    </p>
+                </div>
+                <div class="mb-8">
+                    <p class="text-white font-bold text-sm">The Principal</p>
+                    <p class="text-white/50 text-sm">Future Model of Knowledge Schools</p>
+                </div>
+                <button
+                    @click="modalOpen = true"
+                    class="inline-flex items-center gap-2 bg-[#F5C518] text-zinc-900 font-bold px-7 py-3 rounded-full text-sm hover:bg-yellow-300 active:scale-95 transition-all">
+                    Read More
+                </button>
+            </div>
+
+            {{-- ── Right: principal photo ── --}}
+            <div class="flex justify-center lg:justify-end">
+                <div class="relative w-72 sm:w-80 lg:w-full max-w-sm">
+                    <div class="rounded-3xl overflow-hidden aspect-[3/4] bg-[#2D2B8F] shadow-2xl">
+                        <img src="/images/principal.webp"
+                             alt="FMKS Principal"
+                             class="w-full h-full object-cover object-top"
+                             onerror="this.style.display='none'"
+                        />
+                        <div class="absolute inset-0 flex items-end p-6 bg-gradient-to-t from-[#1a1950]/60 to-transparent"></div>
+                    </div>
+                    <div class="absolute -bottom-4 -left-4 w-24 h-24 rounded-2xl bg-[#F5C518]/10 -z-10"></div>
+                    <div class="absolute -top-4 -right-4 w-16 h-16 rounded-full bg-[#F5C518]/10 -z-10"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    {{-- ══ PRINCIPAL MESSAGE MODAL ══ --}}
+    <div
+        x-show="modalOpen"
+        x-cloak
+        x-transition:enter="transition ease-out duration-200"
+        x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100"
+        x-transition:leave="transition ease-in duration-150"
+        x-transition:leave-end="opacity-0"
+        class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-8"
+        @keydown.escape.window="modalOpen = false"
+    >
+        {{-- Backdrop --}}
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" @click="modalOpen = false"></div>
+
+        {{-- Modal panel --}}
+        <div
+            x-show="modalOpen"
+            x-transition:enter="transition ease-out duration-250"
+            x-transition:enter-start="opacity-0 scale-95"
+            x-transition:enter-end="opacity-100 scale-100"
+            x-transition:leave="transition ease-in duration-150"
+            x-transition:leave-end="opacity-0 scale-95"
+            class="relative bg-white rounded-2xl overflow-hidden w-full max-w-4xl max-h-[88vh] flex shadow-2xl"
+        >
+            {{-- Left: photo --}}
+            <div class="hidden sm:block w-[42%] flex-shrink-0 bg-[#2D2B8F]">
+                <img src="/images/principal.webp"
+                     alt="FMKS Principal"
+                     class="w-full h-full object-cover object-top"
+                     onerror="this.style.display='none'"
+                />
+            </div>
+
+            {{-- Right: full message --}}
+            <div class="flex-1 flex flex-col min-h-0 relative">
+                {{-- Gold vertical accent bar — right edge --}}
+                <div class="absolute top-8 bottom-8 right-0 w-1 bg-[#F5C518] rounded-l"></div>
+
+                {{-- Close button --}}
+                <button
+                    @click="modalOpen = false"
+                    class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full text-zinc-400 hover:text-zinc-700 hover:bg-zinc-100 transition-colors text-xl font-light z-10"
+                    aria-label="Close"
+                >
+                    &times;
+                </button>
+
+                {{-- Scrollable content --}}
+                <div class="overflow-y-auto p-8 pr-10 flex-1">
+                    <p class="text-[#F5C518] text-xs font-bold uppercase tracking-widest mb-2">Message from our Principal</p>
+                    <h3 class="font-['Raleway'] text-2xl font-bold text-zinc-900 mb-6">
+                        Welcome to Future Model of Knowledge Schools
+                    </h3>
+
+                    <div class="space-y-4 text-zinc-600 leading-relaxed text-sm">
+                        <p>I believe that every child carries within them an extraordinary potential — waiting to be discovered, nurtured, and set free. At FMKS, we are committed to creating an environment where that potential is not just recognised, but celebrated.</p>
+                        <p>Our school is built on the conviction that true education goes beyond examinations. It shapes character, builds resilience, and lights the path toward a purposeful life. We partner with every family to ensure your child is known, valued, and challenged to grow.</p>
+                        <p>Knowledge, as our motto declares, is Light and Power. It is the most enduring gift we can give a child — one that no circumstance can diminish or take away. We believe in equipping your child with quality education and are committed to pursuing excellence at every stage of their journey.</p>
+                        <p>From our Early Years classrooms filled with curiosity and colour, to our Senior Secondary students preparing confidently for WAEC and beyond — every day at FMKS is a purposeful step forward. Our teachers are not merely instructors; they are mentors, champions, and constant encouragers of every student in their care.</p>
+                        <p>I invite you to visit our school, meet our community, and experience firsthand what makes FMKS a place where children truly flourish. We look forward to welcoming your family into ours.</p>
+                    </div>
+
+                    <div class="mt-8 pt-6 border-t border-zinc-100">
+                        <p class="font-bold text-zinc-900 text-sm">The Principal</p>
+                        <p class="text-zinc-400 text-xs mt-0.5">Future Model of Knowledge Schools</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+
+{{-- ══════════════════════════════════════════════════════
+    ACADEMIC PROGRAMMES
+══════════════════════════════════════════════════════ --}}
+<section class="bg-zinc-50 py-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <div class="text-center mb-14">
+            <span class="inline-block text-[#F5C518] text-xs font-bold uppercase tracking-widest mb-3">What We Offer</span>
+            <h2 class="font-['Raleway'] text-3xl sm:text-4xl font-bold text-zinc-900 mb-4">
+                Our Academic Programmes
+            </h2>
+            <p class="text-zinc-500 max-w-xl mx-auto leading-relaxed">
+                A seamless educational journey from early childhood to senior secondary, with every stage designed for excellence.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-8">
+
+            {{-- Card: Early Years --}}
+            <a href="/academics/early-years"
+               class="group relative h-[420px] rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 hover:-translate-y-1">
+                {{-- colour-coded accent bar --}}
+                <div class="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-sky-400 to-blue-500 z-10"></div>
+                {{-- background image — swap placeholder gradient when photo is ready --}}
+                <img src="/images/programmes/early-years.webp" alt="Early Years programme"
+                     class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                     onerror="this.style.display='none'"
+                />
+                <div class="absolute inset-0 bg-gradient-to-br from-sky-600 to-blue-800 -z-10"></div>
+                {{-- always-on bottom gradient so title is readable --}}
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent
+                            group-hover:from-black/90 group-hover:via-black/50 transition-all duration-500"></div>
+                {{-- content --}}
+                <div class="absolute bottom-0 inset-x-0 p-6">
+                    {{-- subtitle — hidden until hover --}}
+                    <p class="text-xs font-bold text-sky-300 uppercase tracking-widest mb-1.5
+                               opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0
+                               transition-all duration-300">Crèche — KG 2</p>
+                    <h3 class="font-['Raleway'] text-xl font-bold text-white leading-snug">Early Years</h3>
+                    {{-- description — hidden until hover --}}
+                    <p class="text-sm text-white/75 leading-relaxed mt-2
+                               opacity-0 max-h-0 overflow-hidden group-hover:opacity-100 group-hover:max-h-24
+                               transition-all duration-500 delay-75">
+                        Nurturing curiosity and foundational skills through play-based, joyful learning in a safe, loving environment.
+                    </p>
+                    <span class="inline-flex items-center gap-1.5 text-xs font-bold text-sky-300 mt-3
+                                 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0
+                                 transition-all duration-300 delay-100">
+                        Explore programme
+                        <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                        </svg>
+                    </span>
+                </div>
+            </a>
+
+            {{-- Card: Primary --}}
+            <a href="/academics/primary"
+               class="group relative h-[420px] rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 hover:-translate-y-1">
+                <div class="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-emerald-400 to-green-500 z-10"></div>
+                <img src="/images/programmes/primary.webp" alt="Primary School programme"
+                     class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                     onerror="this.style.display='none'"
+                />
+                <div class="absolute inset-0 bg-gradient-to-br from-emerald-600 to-green-800 -z-10"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent
+                            group-hover:from-black/90 group-hover:via-black/50 transition-all duration-500"></div>
+                <div class="absolute bottom-0 inset-x-0 p-6">
+                    <p class="text-xs font-bold text-emerald-300 uppercase tracking-widest mb-1.5
+                               opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0
+                               transition-all duration-300">Primary 1 — 6</p>
+                    <h3 class="font-['Raleway'] text-xl font-bold text-white leading-snug">Primary School</h3>
+                    <p class="text-sm text-white/75 leading-relaxed mt-2
+                               opacity-0 max-h-0 overflow-hidden group-hover:opacity-100 group-hover:max-h-24
+                               transition-all duration-500 delay-75">
+                        Building strong academic foundations with literacy, numeracy, and critical thinking at the core.
+                    </p>
+                    <span class="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-300 mt-3
+                                 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0
+                                 transition-all duration-300 delay-100">
+                        Explore programme
+                        <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                        </svg>
+                    </span>
+                </div>
+            </a>
+
+            {{-- Card: Junior Secondary --}}
+            <a href="/academics/secondary"
+               class="group relative h-[420px] rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 hover:-translate-y-1">
+                <div class="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-amber-400 to-yellow-500 z-10"></div>
+                <img src="/images/programmes/junior-secondary.webp" alt="Junior Secondary programme"
+                     class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                     onerror="this.style.display='none'"
+                />
+                <div class="absolute inset-0 bg-gradient-to-br from-amber-500 to-yellow-700 -z-10"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent
+                            group-hover:from-black/90 group-hover:via-black/50 transition-all duration-500"></div>
+                <div class="absolute bottom-0 inset-x-0 p-6">
+                    <p class="text-xs font-bold text-amber-300 uppercase tracking-widest mb-1.5
+                               opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0
+                               transition-all duration-300">JSS 1 — 3</p>
+                    <h3 class="font-['Raleway'] text-xl font-bold text-white leading-snug">Junior Secondary</h3>
+                    <p class="text-sm text-white/75 leading-relaxed mt-2
+                               opacity-0 max-h-0 overflow-hidden group-hover:opacity-100 group-hover:max-h-24
+                               transition-all duration-500 delay-75">
+                        Expanding horizons across Science, Humanities, Arts, and Technology in preparation for senior school.
+                    </p>
+                    <span class="inline-flex items-center gap-1.5 text-xs font-bold text-amber-300 mt-3
+                                 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0
+                                 transition-all duration-300 delay-100">
+                        Explore programme
+                        <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                        </svg>
+                    </span>
+                </div>
+            </a>
+
+            {{-- Card: Senior Secondary --}}
+            <a href="/academics/secondary"
+               class="group relative h-[420px] rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 hover:-translate-y-1">
+                <div class="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-rose-500 to-[#CC1F1F] z-10"></div>
+                <img src="/images/programmes/senior-secondary.webp" alt="Senior Secondary programme"
+                     class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                     onerror="this.style.display='none'"
+                />
+                <div class="absolute inset-0 bg-gradient-to-br from-rose-700 to-[#8B1212] -z-10"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent
+                            group-hover:from-black/90 group-hover:via-black/50 transition-all duration-500"></div>
+                <div class="absolute bottom-0 inset-x-0 p-6">
+                    <p class="text-xs font-bold text-rose-300 uppercase tracking-widest mb-1.5
+                               opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0
+                               transition-all duration-300">SSS 1 — 3</p>
+                    <h3 class="font-['Raleway'] text-xl font-bold text-white leading-snug">Senior Secondary</h3>
+                    <p class="text-sm text-white/75 leading-relaxed mt-2
+                               opacity-0 max-h-0 overflow-hidden group-hover:opacity-100 group-hover:max-h-24
+                               transition-all duration-500 delay-75">
+                        Rigorous WAEC and NECO preparation, plus university admissions guidance for the next chapter.
+                    </p>
+                    <span class="inline-flex items-center gap-1.5 text-xs font-bold text-rose-300 mt-3
+                                 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0
+                                 transition-all duration-300 delay-100">
+                        Explore programme
+                        <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                        </svg>
+                    </span>
+                </div>
+            </a>
+
+        </div>
+    </div>
+</section>
+
+
+{{-- ══════════════════════════════════════════════════════
+    WHY CHOOSE FMKS
+══════════════════════════════════════════════════════ --}}
+{{-- background-attachment:fixed creates the parallax — cards scroll over the pinned image --}}
+<section class="relative py-24"
+         style="background-image: url('/images/why-fmks.webp'); background-attachment: fixed; background-size: cover; background-position: center;">
+    {{-- Deep purple overlay --}}
+    <div class="absolute inset-0 bg-[#000]/60"></div>
+    {{-- subtle grid texture --}}
+    <div class="absolute inset-0 pointer-events-none opacity-[0.04]"
+         style="background-image: linear-gradient(rgba(255,255,255,0.8) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.8) 1px, transparent 1px); background-size: 56px 56px;"></div>
+    <div class="absolute top-0 right-0 w-96 h-96 rounded-full bg-[#F5C518]/5 blur-3xl pointer-events-none"></div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-[5fr_7fr] gap-12 lg:gap-20 items-center">
+
+            {{-- ── Left: heading ── --}}
+            <div>
+                <span class="inline-block text-[#F5C518] text-xs font-bold uppercase tracking-widest mb-4">Why FMKS</span>
+                <h2 class="font-['Raleway'] text-4xl sm:text-5xl font-bold text-white leading-tight mb-5">
+                    The FMKS<br/>Difference
+                </h2>
+                <div class="w-12 h-0.5 bg-[#F5C518] rounded mb-6"></div>
+                <p class="text-white/60 leading-relaxed text-base">
+                    We go beyond teaching — we inspire, empower, and equip every student for a life of impact.
+                </p>
+            </div>
+
+            {{-- ── Right: 2×3 feature cards ── --}}
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+
+                <div class="bg-[#1e1c6e]/60 border border-white/10 rounded-2xl p-6 hover:bg-[#1e1c6e]/80 transition-colors">
+                    <div class="w-10 h-10 rounded-full bg-[#2D2B8F] flex items-center justify-center mb-4">
+                        <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-white font-bold text-sm leading-snug mb-2">Proven Exam Excellence</h3>
+                    <div class="w-7 h-0.5 bg-[#F5C518] rounded mb-3"></div>
+                    <p class="text-white/55 text-xs leading-relaxed">Consistently outstanding WAEC and NECO results, placing our graduates in top universities across Nigeria and abroad.</p>
+                </div>
+
+                <div class="bg-[#1e1c6e]/60 border border-white/10 rounded-2xl p-6 hover:bg-[#1e1c6e]/80 transition-colors">
+                    <div class="w-10 h-10 rounded-full bg-[#2D2B8F] flex items-center justify-center mb-4">
+                        <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-white font-bold text-sm leading-snug mb-2">Expert &amp; Dedicated Faculty</h3>
+                    <div class="w-7 h-0.5 bg-[#F5C518] rounded mb-3"></div>
+                    <p class="text-white/55 text-xs leading-relaxed">Qualified, passionate educators who know each student by name and are committed to bringing out the best in every child.</p>
+                </div>
+
+                <div class="bg-[#1e1c6e]/60 border border-white/10 rounded-2xl p-6 hover:bg-[#1e1c6e]/80 transition-colors">
+                    <div class="w-10 h-10 rounded-full bg-[#2D2B8F] flex items-center justify-center mb-4">
+                        <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-white font-bold text-sm leading-snug mb-2">Modern Facilities</h3>
+                    <div class="w-7 h-0.5 bg-[#F5C518] rounded mb-3"></div>
+                    <p class="text-white/55 text-xs leading-relaxed">State-of-the-art classrooms, science labs, a well-stocked library, ICT centre, sports facilities and more — all in one campus.</p>
+                </div>
+
+                <div class="bg-[#1e1c6e]/60 border border-white/10 rounded-2xl p-6 hover:bg-[#1e1c6e]/80 transition-colors">
+                    <div class="w-10 h-10 rounded-full bg-[#2D2B8F] flex items-center justify-center mb-4">
+                        <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-white font-bold text-sm leading-snug mb-2">Holistic Development</h3>
+                    <div class="w-7 h-0.5 bg-[#F5C518] rounded mb-3"></div>
+                    <p class="text-white/55 text-xs leading-relaxed">Beyond academics — we nurture arts, music, debating, clubs, and leadership programs that shape well-rounded individuals.</p>
+                </div>
+
+                <div class="bg-[#1e1c6e]/60 border border-white/10 rounded-2xl p-6 hover:bg-[#1e1c6e]/80 transition-colors">
+                    <div class="w-10 h-10 rounded-full bg-[#2D2B8F] flex items-center justify-center mb-4">
+                        <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-white font-bold text-sm leading-snug mb-2">Safe &amp; Nurturing Environment</h3>
+                    <div class="w-7 h-0.5 bg-[#F5C518] rounded mb-3"></div>
+                    <p class="text-white/55 text-xs leading-relaxed">A secure, respectful and supportive campus where every child is known, valued and encouraged every single day.</p>
+                </div>
+
+                <div class="bg-[#1e1c6e]/60 border border-white/10 rounded-2xl p-6 hover:bg-[#1e1c6e]/80 transition-colors">
+                    <div class="w-10 h-10 rounded-full bg-[#2D2B8F] flex items-center justify-center mb-4">
+                        <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-white font-bold text-sm leading-snug mb-2">Strong Moral Foundation</h3>
+                    <div class="w-7 h-0.5 bg-[#F5C518] rounded mb-3"></div>
+                    <p class="text-white/55 text-xs leading-relaxed">Faith, integrity, and character are woven into every aspect of school life, producing graduates of sound values and conviction.</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{{-- ══════════════════════════════════════════════════════
+    ADMISSIONS CTA BANNER
+══════════════════════════════════════════════════════ --}}
+<section class="bg-[#2D2B8F] overflow-hidden">
+    <div class="flex flex-col lg:flex-row items-stretch min-h-[420px]">
+
+        {{-- ── Left: text on purple ── --}}
+        <div class="flex-1 flex flex-col justify-center px-8 sm:px-12 lg:px-20 py-16 lg:py-20">
+            <span class="text-[#F5C518] text-xs font-bold uppercase tracking-widest mb-5">Enrolment Now Open</span>
+            <h2 class="font-['Raleway'] text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight mb-5">
+                Apply now for the<br/>2025/2026 Session
+            </h2>
+            <p class="text-white/65 leading-relaxed mb-8 max-w-md">
+                Secure your child's place at FMKS today. Limited spaces are available across all classes — early applications are strongly encouraged.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-3">
+                <a href="/admissions/apply"
+                   class="inline-flex items-center justify-center gap-2 bg-[#F5C518] text-zinc-900 font-bold px-8 py-3.5 rounded-full text-sm hover:bg-yellow-300 active:scale-95 transition-all shadow-lg w-fit">
+                    Apply Now
+                </a>
+                <a href="/admissions"
+                   class="inline-flex items-center justify-center gap-2 bg-white/10 border border-white/20 text-white font-semibold px-8 py-3.5 rounded-full text-sm hover:bg-white/20 active:scale-95 transition-all w-fit">
+                    Admissions Info
+                </a>
+            </div>
+        </div>
+
+        {{-- ── Right: photo with curved left edge ── --}}
+        <div class="hidden lg:block relative w-[52%] flex-shrink-0">
+            {{-- The large border-radius on the left creates the circular curve like the reference design --}}
+            <div class="absolute inset-0 overflow-hidden"
+                 style="border-top-left-radius: 55%; border-bottom-left-radius: 55%;">
+                <img src="/images/admissions-cta.webp"
+                     alt="Happy FMKS students"
+                     class="w-full h-full object-cover object-center"
+                     onerror="this.style.display='none'"
+                />
+                {{-- Fallback colour while photo is pending --}}
+                <div class="absolute inset-0 bg-[#1a1950] -z-10"></div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+{{-- ══════════════════════════════════════════════════════
+    TESTIMONIALS
+══════════════════════════════════════════════════════ --}}
+<section class="bg-white py-24"
+    x-data="{
+        current: 0,
+        visible: true,
+        testimonials: [
+            {
+                quote: 'Enrolling my daughter at FMKS was the best decision we made. The teachers are incredibly dedicated, and she has grown not just academically but in character and confidence. The school truly lives up to its motto.',
+                name: 'Mrs. Adaeze Achebe',
+                role: 'Parent · SSS 2 Student',
+                initials: 'AA'
+            },
+            {
+                quote: 'My son\'s transformation since joining FMKS has been remarkable. He went from being shy and uninterested in school to topping his class and leading the debate team. The school\'s environment truly breeds excellence.',
+                name: 'Dr. Olumide Bankole',
+                role: 'Parent · JSS 3 Student',
+                initials: 'OB'
+            },
+            {
+                quote: 'Three of my children attend FMKS. The school\'s commitment to holistic development — academics, sports, arts, and values — is unmatched. I wouldn\'t trust anyone else with my children\'s education.',
+                name: 'Engr. Fatima Kante',
+                role: 'Parent · Primary & Secondary',
+                initials: 'FK'
+            }
+        ],
+        go(i) {
+            if (i === this.current) return;
+            this.visible = false;
+            setTimeout(() => { this.current = i; this.visible = true; }, 300);
+        },
+        prev() { this.go((this.current - 1 + this.testimonials.length) % this.testimonials.length) },
+        next() { this.go((this.current + 1) % this.testimonials.length) }
+    }"
+>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <div class="text-center mb-14">
+            <span class="inline-block text-[#F5C518] text-xs font-bold uppercase tracking-widest mb-3">What Families Say</span>
+            <h2 class="font-['Raleway'] text-3xl sm:text-4xl font-bold text-zinc-900">
+                Trusted by Families<br/>Across Nigeria
+            </h2>
+        </div>
+
+        {{-- ── Slider ── --}}
+        <div class="relative flex items-center gap-4 lg:gap-8">
+
+            {{-- Prev arrow --}}
+            <button @click="prev()"
+                    aria-label="Previous testimonial"
+                    class="flex-shrink-0 w-11 h-11 rounded-full border border-zinc-200 flex items-center justify-center text-zinc-400 hover:border-[#2D2B8F] hover:text-[#2D2B8F] hover:bg-[#2D2B8F]/5 transition-all">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                </svg>
+            </button>
+
+            {{-- Card stage — height must accommodate the longest quote at each breakpoint --}}
+            <div class="flex-1 relative min-h-[460px] sm:min-h-[360px] lg:min-h-[300px]">
+                <div
+                    x-show="visible"
+                    x-cloak
+                    x-transition:enter="transition ease-out duration-400"
+                    x-transition:enter-start="opacity-0 translate-y-2"
+                    x-transition:enter-end="opacity-100 translate-y-0"
+                    x-transition:leave="transition ease-in duration-250"
+                    x-transition:leave-start="opacity-100 translate-y-0"
+                    x-transition:leave-end="opacity-0 -translate-y-2"
+                    class="absolute inset-0 bg-[#2D2B8F] rounded-3xl p-8 sm:p-10 flex flex-col justify-between"
+                >
+                    {{-- Stars --}}
+                    <div class="flex gap-0.5 mb-5">
+                        <svg class="w-4 h-4 text-[#F5C518] fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-4 h-4 text-[#F5C518] fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-4 h-4 text-[#F5C518] fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-4 h-4 text-[#F5C518] fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-4 h-4 text-[#F5C518] fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    </div>
+
+                    {{-- Large open-quote --}}
+                    <svg class="w-10 h-10 text-[#F5C518]/25 mb-2 flex-shrink-0" fill="currentColor" viewBox="0 0 32 32">
+                        <path d="M10 8C5.6 8 2 11.6 2 16v8h8v-8H5c0-2.8 2.2-5 5-5V8zm18 0c-4.4 0-8 3.6-8 8v8h8v-8h-5c0-2.8 2.2-5 5-5V8z"/>
+                    </svg>
+
+                    <p class="text-white/80 text-base sm:text-lg leading-relaxed italic flex-1"
+                       x-text="testimonials[current].quote"></p>
+
+                    <div class="flex items-center gap-3 mt-6 pt-6 border-t border-white/10">
+                        <div class="w-10 h-10 rounded-full bg-white/15 flex items-center justify-center font-bold text-sm text-white flex-shrink-0"
+                             x-text="testimonials[current].initials"></div>
+                        <div>
+                            <p class="text-sm font-bold text-white" x-text="testimonials[current].name"></p>
+                            <p class="text-xs text-white/50" x-text="testimonials[current].role"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Next arrow --}}
+            <button @click="next()"
+                    aria-label="Next testimonial"
+                    class="flex-shrink-0 w-11 h-11 rounded-full border border-zinc-200 flex items-center justify-center text-zinc-400 hover:border-[#2D2B8F] hover:text-[#2D2B8F] hover:bg-[#2D2B8F]/5 transition-all">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+            </button>
+
+        </div>
+
+        {{-- Dot indicators --}}
+        <div class="flex justify-center gap-2 mt-8">
+            <template x-for="(t, i) in testimonials" :key="i">
+                <button @click="go(i)"
+                        :class="current === i ? 'w-7 bg-[#2D2B8F]' : 'w-2.5 bg-zinc-300 hover:bg-zinc-400'"
+                        class="h-2.5 rounded-full transition-all duration-300"
+                        :aria-label="'Go to testimonial ' + (i + 1)"></button>
+            </template>
+        </div>
+
+    </div>
+</section>
+
+
+{{-- ══════════════════════════════════════════════════════
+    LATEST NEWS & EVENTS
+══════════════════════════════════════════════════════ --}}
+<section class="bg-zinc-50 py-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <div class="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4 mb-12">
+            <div>
+                <span class="inline-block text-[#F5C518] text-xs font-bold uppercase tracking-widest mb-3">Latest Updates</span>
+                <h2 class="font-['Raleway'] text-3xl sm:text-4xl font-bold text-zinc-900">
+                    News &amp; Events
+                </h2>
+            </div>
+            <a href="/news"
+               class="inline-flex items-center gap-1.5 text-sm font-semibold text-[#2D2B8F] hover:gap-2.5 transition-all">
+                View all news
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                </svg>
+            </a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-7">
+            @foreach ($latestNews as $post)
+            <article class="bg-white rounded-3xl overflow-hidden border border-zinc-100 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all group">
+                <div class="aspect-video bg-gradient-to-br from-[#2D2B8F]/10 to-[#2D2B8F]/20 overflow-hidden">
+                    @if ($post->featured_image)
+                    <img src="{{ Storage::url($post->featured_image) }}" alt="{{ $post->title }}"
+                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+                    @endif
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="bg-[#2D2B8F]/10 text-[#2D2B8F] text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full">{{ $post->type === 'event' ? 'Event' : 'News' }}</span>
+                        <span class="text-[11px] text-zinc-400">{{ $post->published_at->format('F j, Y') }}</span>
+                    </div>
+                    <h3 class="font-['Raleway'] text-base font-bold text-zinc-900 mb-2 group-hover:text-[#2D2B8F] transition-colors">
+                        {{ $post->title }}
+                    </h3>
+                    <p class="text-sm text-zinc-500 leading-relaxed mb-4">
+                        {{ Str::limit($post->excerpt, 120) }}
+                    </p>
+                    <a href="{{ route('news.show', $post) }}" class="text-xs font-bold text-[#2D2B8F] hover:underline">Read more →</a>
+                </div>
+            </article>
+            @endforeach
+        </div>
+    </div>
+</section>
+@endsection

@@ -1,19 +1,14 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "statamic/statamic",
+    "name": "elrize/fmkschools",
     "type": "project",
-    "description": "Statamic",
-    "keywords": [
-        "statamic",
-        "cms",
-        "flat file",
-        "laravel"
-    ],
+    "description": "FMK Schools website",
     "require": {
         "php": "^8.2",
+        "filament/filament": "^5.7",
         "laravel/framework": "^13.8",
         "laravel/tinker": "^3.0",
-        "statamic/cms": "^6.0"
+        "league/commonmark": "^2.10"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
@@ -55,13 +50,10 @@
             "@php artisan config:clear --ansi @no_additional_args",
             "@php artisan test"
         ],
-        "pre-update-cmd": [
-            "Statamic\\Console\\Composer\\Scripts::preUpdateCmd"
-        ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi",
-            "@php artisan statamic:install --ansi"
+            "@php artisan filament:upgrade"
         ],
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
