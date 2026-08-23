@@ -35,7 +35,7 @@
 
         @if ($announcement->image)
         <div class="aspect-video overflow-hidden">
-            <img src="{{ Storage::url($announcement->image) }}" alt="{{ $announcement->title }}" class="w-full h-full object-cover" />
+            <img src="{{ Storage::disk('public')->url($announcement->image) }}" alt="{{ $announcement->title }}" class="w-full h-full object-cover" />
         </div>
         @endif
 

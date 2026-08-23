@@ -3,7 +3,7 @@
 @section('meta_title', $post->seo_title ?: $post->title . ' — ' . config('app.name'))
 @section('meta_description', $post->seo_description ?: $post->excerpt)
 @if ($post->featured_image)
-@section('og_image', Storage::url($post->featured_image))
+@section('og_image', Storage::disk('public')->url($post->featured_image))
 @endif
 
 @section('content')
@@ -60,7 +60,7 @@
 <div class="bg-white">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 relative z-10">
         <div class="rounded-3xl overflow-hidden shadow-xl aspect-video">
-            <img src="{{ Storage::url($post->featured_image) }}" alt="{{ $post->title }}" class="w-full h-full object-cover" />
+            <img src="{{ Storage::disk('public')->url($post->featured_image) }}" alt="{{ $post->title }}" class="w-full h-full object-cover" />
         </div>
     </div>
 </div>

@@ -937,7 +937,7 @@
             <article class="bg-white rounded-3xl overflow-hidden border border-zinc-100 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all group">
                 <div class="aspect-video bg-gradient-to-br from-[#2D2B8F]/10 to-[#2D2B8F]/20 overflow-hidden">
                     @if ($post->featured_image)
-                    <img src="{{ Storage::url($post->featured_image) }}" alt="{{ $post->title }}"
+                    <img src="{{ Storage::disk('public')->url($post->featured_image) }}" alt="{{ $post->title }}"
                          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
                     @endif
                 </div>

@@ -30,7 +30,7 @@ class Slide extends Model
     public function toSliderArray(): array
     {
         return [
-            'image' => Storage::url($this->image),
+            'image' => Storage::disk('public')->url($this->image),
             'tag' => $this->tag,
             'headline' => $this->headline,
             'sub' => $this->subtext,

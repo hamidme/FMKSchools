@@ -54,7 +54,7 @@
                 {{-- Image or colour placeholder --}}
                 @if ($post->featured_image)
                 <div class="aspect-video overflow-hidden">
-                    <img src="{{ Storage::url($post->featured_image) }}" alt="{{ $post->title }}"
+                    <img src="{{ Storage::disk('public')->url($post->featured_image) }}" alt="{{ $post->title }}"
                          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                 </div>
                 @else
