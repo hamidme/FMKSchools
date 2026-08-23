@@ -3,6 +3,8 @@
 use App\Http\Controllers\ContactController;
 use App\Models\Announcement;
 use App\Models\NewsPost;
+use App\Models\OpenDaySession;
+use App\Models\Slide;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Route;
 
@@ -10,6 +12,10 @@ Route::get('/', function () {
     return view('home', [
         'latestNews' => NewsPost::published()->orderByDesc('published_at')->limit(3)->get(),
         'announcement' => Announcement::current(),
+        'slides' => Slide::where('is_active', true)
+            ->orderBy('sort_order')
+            ->get()
+            ->map->toSliderArray(),
     ]);
 })->name('home');
 
@@ -28,7 +34,11 @@ Route::view('/academics/curriculum', 'academics.curriculum')->name('academics.cu
 Route::redirect('/admissions', '/admissions/apply');
 Route::view('/admissions/apply', 'admissions.apply')->name('admissions.apply');
 Route::view('/admissions/fees', 'admissions.fees')->name('admissions.fees');
-Route::view('/admissions/open-day', 'admissions.open-day')->name('admissions.open-day');
+Route::get('/admissions/open-day', function () {
+    return view('admissions.open-day', [
+        'sessions' => OpenDaySession::upcoming()->get(),
+    ]);
+})->name('admissions.open-day');
 
 Route::redirect('/student-life', '/student-life/clubs');
 Route::view('/student-life/clubs', 'student-life.clubs')->name('student-life.clubs');

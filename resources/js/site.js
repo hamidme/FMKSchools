@@ -2,33 +2,8 @@ import Alpine from 'alpinejs'
 window.Alpine = Alpine
 
 document.addEventListener('alpine:init', () => {
-    Alpine.data('heroSlider', () => ({
-        slides: [
-            {
-                image: '/images/slides/slide-1.webp',
-                tag: 'Welcome to FMKS',
-                headline: 'Excellence in<br/>Education',
-                sub: 'Nurturing brilliant minds through academic excellence, strong values, and holistic development — from Crèche through to Senior Secondary.',
-                cta1: { text: 'Apply for 2026/2027', href: '/admissions/apply' },
-                cta2: { text: 'Discover Our School', href: '#about' },
-            },
-            {
-                image: '/images/slides/slide-2.webp',
-                tag: 'Academic Excellence',
-                headline: 'Shaping Leaders,<br/>Lighting Futures',
-                sub: 'Award-winning results, dedicated teachers, and a curriculum designed to prepare your child for a lifetime of impact.',
-                cta1: { text: 'Our Programmes', href: '/academics' },
-                cta2: { text: 'View Achievements', href: '/student-life/achievements' },
-            },
-            {
-                image: '/images/slides/slide-3.webp',
-                tag: 'Admissions Open',
-                headline: 'Your Child\'s Journey<br/>Begins Here',
-                sub: 'Applications are open for the 2026/2027 academic session. Join the FMKS family and give your child the future they deserve.',
-                cta1: { text: 'Apply Now', href: '/admissions/apply' },
-                cta2: { text: 'Admissions Info', href: '/admissions' },
-            },
-        ],
+    Alpine.data('heroSlider', (slides) => ({
+        slides: slides ?? [],
 
         current: 0,
         contentVisible: true,
@@ -36,6 +11,7 @@ document.addEventListener('alpine:init', () => {
         _timer: null,
 
         init() {
+            if (this.slides.length < 2) return
             this._timer = setInterval(() => {
                 if (!this.paused) this.next()
             }, 5500)

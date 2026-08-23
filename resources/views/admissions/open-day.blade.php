@@ -38,42 +38,28 @@
             {{-- Upcoming dates --}}
             <div>
                 <span class="text-[#F5C518] text-xs font-bold uppercase tracking-widest mb-4 block">Upcoming Dates</span>
-                <h2 class="font-['Raleway'] text-3xl font-bold text-zinc-900 mb-8">2025/2026 Open Days</h2>
-                <div class="space-y-4">
-                    <div class="flex gap-5 bg-[#2D2B8F] rounded-3xl p-6 items-start">
-                        <div class="bg-[#F5C518] rounded-2xl px-4 py-3 text-center flex-shrink-0">
-                            <p class="font-['Raleway'] text-2xl font-bold text-zinc-900 leading-none">19</p>
-                            <p class="text-zinc-700 text-xs font-bold uppercase tracking-wider mt-1">Jul</p>
-                        </div>
-                        <div>
-                            <p class="font-['Raleway'] font-bold text-white">Saturday, 19 July 2025</p>
-                            <p class="text-white/60 text-sm mt-1">9:00 AM — 12:00 PM</p>
-                            <p class="text-white/50 text-xs mt-2">General Open Day — all arms of the school</p>
-                        </div>
-                    </div>
-                    <div class="flex gap-5 bg-zinc-50 border border-zinc-100 rounded-3xl p-6 items-start">
-                        <div class="bg-[#2D2B8F]/10 rounded-2xl px-4 py-3 text-center flex-shrink-0">
-                            <p class="font-['Raleway'] text-2xl font-bold text-[#2D2B8F] leading-none">23</p>
-                            <p class="text-[#2D2B8F] text-xs font-bold uppercase tracking-wider mt-1">Aug</p>
-                        </div>
-                        <div>
-                            <p class="font-['Raleway'] font-bold text-zinc-900">Saturday, 23 August 2025</p>
-                            <p class="text-zinc-500 text-sm mt-1">9:00 AM — 12:00 PM</p>
-                            <p class="text-zinc-400 text-xs mt-2">Secondary School focused — JSS &amp; SSS admissions</p>
-                        </div>
-                    </div>
-                    <div class="flex gap-5 bg-zinc-50 border border-zinc-100 rounded-3xl p-6 items-start">
-                        <div class="bg-[#2D2B8F]/10 rounded-2xl px-4 py-3 text-center flex-shrink-0">
-                            <p class="font-['Raleway'] text-2xl font-bold text-[#2D2B8F] leading-none">11</p>
-                            <p class="text-[#2D2B8F] text-xs font-bold uppercase tracking-wider mt-1">Oct</p>
-                        </div>
-                        <div>
-                            <p class="font-['Raleway'] font-bold text-zinc-900">Saturday, 11 October 2025</p>
-                            <p class="text-zinc-500 text-sm mt-1">9:00 AM — 12:00 PM</p>
-                            <p class="text-zinc-400 text-xs mt-2">Early Years &amp; Primary focused</p>
-                        </div>
-                    </div>
+                <h2 class="font-['Raleway'] text-3xl font-bold text-zinc-900 mb-8">Open Days</h2>
+                @if ($sessions->isEmpty())
+                <div class="bg-zinc-50 border border-zinc-100 rounded-3xl p-6">
+                    <p class="text-zinc-500 text-sm">No Open Days are currently scheduled. Please check back soon or contact us directly to arrange a visit.</p>
                 </div>
+                @else
+                <div class="space-y-4">
+                    @foreach ($sessions as $session)
+                    <div class="flex gap-5 rounded-3xl p-6 items-start {{ $loop->first ? 'bg-[#2D2B8F]' : 'bg-zinc-50 border border-zinc-100' }}">
+                        <div class="rounded-2xl px-4 py-3 text-center flex-shrink-0 {{ $loop->first ? 'bg-[#F5C518]' : 'bg-[#2D2B8F]/10' }}">
+                            <p class="font-['Raleway'] text-2xl font-bold leading-none {{ $loop->first ? 'text-zinc-900' : 'text-[#2D2B8F]' }}">{{ $session->date->format('d') }}</p>
+                            <p class="text-xs font-bold uppercase tracking-wider mt-1 {{ $loop->first ? 'text-zinc-700' : 'text-[#2D2B8F]' }}">{{ $session->date->format('M') }}</p>
+                        </div>
+                        <div>
+                            <p class="font-['Raleway'] font-bold {{ $loop->first ? 'text-white' : 'text-zinc-900' }}">{{ $session->date->format('l, j F Y') }}</p>
+                            <p class="text-sm mt-1 {{ $loop->first ? 'text-white/60' : 'text-zinc-500' }}">{{ $session->time_range }}</p>
+                            <p class="text-xs mt-2 {{ $loop->first ? 'text-white/50' : 'text-zinc-400' }}">{{ $session->description }}</p>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+                @endif
                 <p class="text-zinc-400 text-xs mt-5">More dates may be added. Follow us on social media for updates.</p>
             </div>
 

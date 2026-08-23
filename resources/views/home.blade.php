@@ -6,7 +6,7 @@
     HERO SLIDER
 ══════════════════════════════════════════════════════ --}}
 <section
-    x-data="heroSlider()"
+    x-data="heroSlider(@js($slides))"
     x-init="init()"
     @mouseenter="paused = true"
     @mouseleave="paused = false"
