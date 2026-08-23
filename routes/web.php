@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ContactController;
+use App\Models\Announcement;
 use App\Models\NewsPost;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Route;
@@ -8,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('home', [
         'latestNews' => NewsPost::published()->orderByDesc('published_at')->limit(3)->get(),
+        'announcement' => Announcement::current(),
     ]);
 })->name('home');
 

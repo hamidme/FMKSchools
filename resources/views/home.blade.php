@@ -1,6 +1,7 @@
 @extends('layout')
 
 @section('content')
+@include('partials.announcement-popup')
 {{-- ══════════════════════════════════════════════════════
     HERO SLIDER
 ══════════════════════════════════════════════════════ --}}

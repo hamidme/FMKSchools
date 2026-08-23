@@ -53,6 +53,28 @@ document.addEventListener('alpine:init', () => {
         next() { this.go((this.current + 1) % this.slides.length) },
         prev() { this.go((this.current - 1 + this.slides.length) % this.slides.length) },
     }))
+
+    Alpine.data('announcementPopup', (id) => ({
+        id: id,
+        show: false,
+
+        init() {
+            try {
+                this.show = localStorage.getItem('fmks_announcement_dismissed') !== String(this.id)
+            } catch (e) {
+                this.show = true
+            }
+        },
+
+        dismiss() {
+            try {
+                localStorage.setItem('fmks_announcement_dismissed', String(this.id))
+            } catch (e) {
+                // ignore (private browsing, storage disabled, etc.)
+            }
+            this.show = false
+        },
+    }))
 })
 
 Alpine.start()
