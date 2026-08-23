@@ -48,6 +48,16 @@ class SlideTest extends TestCase
         $this->assertSame(['First', 'Second'], $slides);
     }
 
+    public function test_homepage_does_not_render_broken_slider_when_no_slides_exist(): void
+    {
+        // No slides created — this is production's state right after a fresh
+        // migrate with no seeding, or every slide toggled inactive.
+        $response = $this->get('/');
+
+        $response->assertOk();
+        $response->assertDontSee('heroSlider');
+    }
+
     public function test_admin_can_view_slide_list(): void
     {
         $user = User::factory()->create();
