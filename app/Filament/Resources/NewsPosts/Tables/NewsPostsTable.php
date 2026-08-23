@@ -19,6 +19,7 @@ class NewsPostsTable
             ->defaultSort('published_at', 'desc')
             ->columns([
                 ImageColumn::make('featured_image')
+                    ->disk('public')
                     ->label('')
                     ->circular()
                     ->size(40),

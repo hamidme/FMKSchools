@@ -22,6 +22,7 @@ class SlideForm
                             ->default(true),
                         FileUpload::make('image')
                             ->image()
+                            ->disk('public')
                             ->directory('slides')
                             ->required(),
                         TextInput::make('tag')

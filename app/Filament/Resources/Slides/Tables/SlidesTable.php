@@ -20,6 +20,7 @@ class SlidesTable
             ->reorderable('sort_order')
             ->columns([
                 ImageColumn::make('image')
+                    ->disk('public')
                     ->label(''),
                 TextColumn::make('tag')
                     ->searchable(),

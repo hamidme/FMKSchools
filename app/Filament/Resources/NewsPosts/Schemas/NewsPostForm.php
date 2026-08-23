@@ -44,6 +44,7 @@ class NewsPostForm
                         FileUpload::make('featured_image')
                             ->label('Featured Image')
                             ->image()
+                            ->disk('public')
                             ->directory('news')
                             ->columnSpanFull(),
                         MarkdownEditor::make('content')

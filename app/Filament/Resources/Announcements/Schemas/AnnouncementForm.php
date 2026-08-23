@@ -29,6 +29,7 @@ class AnnouncementForm
                             ->rows(4),
                         FileUpload::make('image')
                             ->image()
+                            ->disk('public')
                             ->directory('announcements'),
                         TextInput::make('link_text')
                             ->label('Button text')
