@@ -57,21 +57,21 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center justify-between flex-wrap gap-2">
                 <div class="flex items-center gap-4 flex-wrap">
                     <span>📞 School Families:
-                        <a href="tel:+234 703 571 9683"
+                        <a href="https://wa.me/2347035719683" target="_blank" rel="noopener"
                            class="underline underline-offset-2 hover:text-[#F5C518] transition-colors">
                             +234 703 571 9683
                         </a>
                     </span>
                     <span class="text-white/30">|</span>
                     <span>New Admissions:
-                        <a href="tel:+234 802 973 4529"
+                        <a href="https://wa.me/2348029734529" target="_blank" rel="noopener"
                            class="underline underline-offset-2 hover:text-[#F5C518] transition-colors">
                             +234 802 973 4529
                         </a>
                     </span>
                     <span class="text-white/30">|</span>
                     <span>General Enquiry:
-                        <a href="tel:+234 902 722 1475"
+                        <a href="https://wa.me/2349027221475" target="_blank" rel="noopener"
                            class="underline underline-offset-2 hover:text-[#F5C518] transition-colors">
                             +234 902 722 1475
                         </a>
@@ -350,7 +350,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                           d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
                                 </svg>
-                                <a href="tel:+234 703 571 9683"
+                                <a href="https://wa.me/2347035719683" target="_blank" rel="noopener"
                                    class="text-sm text-white/55 hover:text-white transition-colors">+234 703 571 9683</a>
                             </li>
                             <li class="flex items-center gap-3">
@@ -364,7 +364,7 @@
                         </ul>
                         <div class="mt-5 p-4 rounded-2xl bg-white/5 border border-white/10">
                             <p class="text-[10px] text-[#F5C518] font-bold uppercase tracking-wider mb-1">Admissions Enquiry</p>
-                            <a href="tel:+234 802 973 4529"
+                            <a href="https://wa.me/2348029734529" target="_blank" rel="noopener"
                                class="text-sm text-white/80 hover:text-white font-semibold transition-colors">+234 802 973 4529</a>
                         </div>
                     </div>
@@ -392,8 +392,7 @@
              class="fixed bottom-6 right-6 left-6 flex justify-between items-end z-50 pointer-events-none">
 
             {{-- WhatsApp --}}
-            <a href="https://wa.me/2347035719683
-"
+            <a href="https://wa.me/2347035719683"
                target="_blank" rel="noopener"
                class="pointer-events-auto w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:scale-105 active:scale-95 transition-transform"
                style="background-color:#25d366;"

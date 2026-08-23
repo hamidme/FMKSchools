@@ -53,9 +53,9 @@
                             </div>
                             <div>
                                 <p class="font-semibold text-zinc-900 text-sm mb-1">Phone</p>
-                                <a href="tel:+234 703 571 9683" class="text-zinc-500 text-sm hover:text-[#2D2B8F] transition-colors">+234 703 571 9683</a><br>
-                                <a href="tel:+234 802 973 4529" class="text-zinc-500 text-sm hover:text-[#2D2B8F] transition-colors">+234 802 973 4529</a><br>
-                                <a href="tel:+234 902 722 1475" class="text-zinc-500 text-sm hover:text-[#2D2B8F] transition-colors">+234 902 722 1475</a>
+                                <a href="https://wa.me/2347035719683" target="_blank" rel="noopener" class="text-zinc-500 text-sm hover:text-[#2D2B8F] transition-colors">+234 703 571 9683</a><br>
+                                <a href="https://wa.me/2348029734529" target="_blank" rel="noopener" class="text-zinc-500 text-sm hover:text-[#2D2B8F] transition-colors">+234 802 973 4529</a><br>
+                                <a href="https://wa.me/2349027221475" target="_blank" rel="noopener" class="text-zinc-500 text-sm hover:text-[#2D2B8F] transition-colors">+234 902 722 1475</a>
                             </div>
                         </div>
 
