@@ -1,6 +1,6 @@
 {
   "resources/css/site.css": {
-    "file": "assets/site-BLxP3JqG.css",
+    "file": "assets/site-2WCJOPzs.css",
     "name": "site",
     "names": [
       "site.css"
@@ -9,7 +9,7 @@
     "isEntry": true
   },
   "resources/js/site.js": {
-    "file": "assets/site-TJZaViaU.js",
+    "file": "assets/site-CS7VeZQB.js",
     "name": "site",
     "src": "resources/js/site.js",
     "isEntry": true

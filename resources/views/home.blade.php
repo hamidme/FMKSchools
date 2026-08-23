@@ -748,7 +748,7 @@
         <div class="flex-1 flex flex-col justify-center px-8 sm:px-12 lg:px-20 py-16 lg:py-20">
             <span class="text-[#F5C518] text-xs font-bold uppercase tracking-widest mb-5">Enrolment Now Open</span>
             <h2 class="font-['Raleway'] text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight mb-5">
-                Apply now for the<br/>2025/2026 Session
+                Apply now for the<br/>2026/2027 Session
             </h2>
             <p class="text-white/65 leading-relaxed mb-8 max-w-md">
                 Secure your child's place at FMKS today. Limited spaces are available across all classes — early applications are strongly encouraged.
