@@ -3,6 +3,8 @@ deployment:
   tasks:
     - export DEPLOYPATH=/home/fmkschoo/public_html/
     - /bin/cp -R . $DEPLOYPATH
+    - cd $DEPLOYPATH && rm -f bootstrap/cache/services.php bootstrap/cache/packages.php
+    - cd $DEPLOYPATH && php artisan package:discover --ansi
     - cd $DEPLOYPATH && php artisan migrate --force
     - cd $DEPLOYPATH && php artisan storage:link || true
     - cd $DEPLOYPATH && php artisan config:cache
