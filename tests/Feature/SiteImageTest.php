@@ -7,6 +7,7 @@ use App\Models\SiteImage;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Livewire;
 use Tests\TestCase;
@@ -21,6 +22,18 @@ class SiteImageTest extends TestCase
             ->assertOk()
             ->assertSee('/images/principal.webp')
             ->assertSee('/images/fmks_logo.webp');
+    }
+
+    public function test_site_still_renders_if_deploy_skipped_migrate_and_config_cache(): void
+    {
+        // Production's deploy script has stopped partway before; neither a
+        // missing table nor a stale config cache should take the site down.
+        Schema::drop('site_images');
+        config(['site-images' => null]);
+
+        $this->get('/')
+            ->assertOk()
+            ->assertSee('/images/principal.webp');
     }
 
     public function test_uploaded_replacement_is_used_everywhere_the_slot_appears(): void
