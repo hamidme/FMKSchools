@@ -40,7 +40,7 @@
         <div class="bg-[#1a1950] rounded-3xl overflow-hidden mb-10">
             <div class="grid grid-cols-1 lg:grid-cols-[2fr_3fr] items-stretch">
                 <div class="aspect-[4/3] lg:aspect-auto bg-[#2D2B8F] min-h-[320px]">
-                    <img src="/images/principal.webp" alt="FMKS Principal"
+                    <img src="@siteImage('principal')" alt="FMKS Principal"
                          class="w-full h-full object-cover object-top"
                          onerror="this.style.display='none'"/>
                 </div>
@@ -62,7 +62,7 @@
 
             <div class="bg-white rounded-3xl overflow-hidden border border-zinc-100 shadow-sm">
                 <div class="aspect-[4/3] bg-[#2D2B8F]/10 overflow-hidden">
-                    <img src="/images/about/vp-academics.webp" alt="Vice Principal Academics"
+                    <img src="@siteImage('vp_academics')" alt="Vice Principal Academics"
                          class="w-full h-full object-cover object-top"
                          onerror="this.style.display='none'"/>
                 </div>
@@ -76,7 +76,7 @@
 
             <div class="bg-white rounded-3xl overflow-hidden border border-zinc-100 shadow-sm">
                 <div class="aspect-[4/3] bg-[#F5C518]/10 overflow-hidden">
-                    <img src="/images/about/vp-admin.webp" alt="Vice Principal Administration"
+                    <img src="@siteImage('vp_admin')" alt="Vice Principal Administration"
                          class="w-full h-full object-cover object-top"
                          onerror="this.style.display='none'"/>
                 </div>
@@ -90,7 +90,7 @@
 
             <div class="bg-white rounded-3xl overflow-hidden border border-zinc-100 shadow-sm">
                 <div class="aspect-[4/3] bg-[#CC1F1F]/5 overflow-hidden">
-                    <img src="/images/about/head-early-years.webp" alt="Head of Early Years"
+                    <img src="@siteImage('head_early_years')" alt="Head of Early Years"
                          class="w-full h-full object-cover object-top"
                          onerror="this.style.display='none'"/>
                 </div>

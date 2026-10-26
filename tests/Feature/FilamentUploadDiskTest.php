@@ -23,6 +23,7 @@ class FilamentUploadDiskTest extends TestCase
         $files = array_merge(
             glob(app_path('Filament/Resources/*/Schemas/*.php')),
             glob(app_path('Filament/Resources/*/Tables/*.php')),
+            glob(app_path('Filament/Pages/*.php')),
         );
 
         $this->assertNotEmpty($files, 'Expected to find Filament resource schema/table files.');

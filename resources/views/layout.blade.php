@@ -24,8 +24,8 @@
         <link rel="canonical" content="{{ url()->current() }}">
         {{-- Google Search Console — paste your verification content value below --}}
         {{-- <meta name="google-site-verification" content="PASTE_YOUR_CODE_HERE"> --}}
-        <link rel="icon" href="/favicon.ico" sizes="any">
-        <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+        <link rel="icon" href="@siteImage('favicon')" sizes="any">
+        <link rel="apple-touch-icon" href="@siteImage('favicon')">
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@600;700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -102,7 +102,7 @@
                     {{-- LOGO --}}
                     <a href="/" class="flex items-center gap-3 group flex-shrink-0">
                         <img
-                            src="/images/fmks_logo.webp"
+                            src="@siteImage('logo')"
                             alt="FMKS Logo"
                             class="h-16 w-16 object-contain drop-shadow-sm group-hover:scale-105 transition-transform duration-200"
                         />
@@ -259,7 +259,7 @@
                     {{-- Column 1: School identity --}}
                     <div class="lg:col-span-1">
                         <a href="/" class="flex items-center gap-3 mb-5 group">
-                            <img src="/images/fmks_logo.webp" alt="FMKS Logo"
+                            <img src="@siteImage('logo')" alt="FMKS Logo"
                                  class="h-14 w-14 object-contain opacity-90 group-hover:opacity-100 transition-opacity"/>
                             <div class="leading-tight">
                                 <span class="font-['Raleway'] text-sm font-bold text-white block leading-snug">

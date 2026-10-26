@@ -48,7 +48,7 @@
             </div>
             <div class="relative">
                 <div class="rounded-3xl overflow-hidden aspect-[4/3] bg-sky-50 shadow-xl">
-                    <img src="/images/programmes/early-years.webp" alt="Early Years classroom"
+                    <img src="@siteImage('programme_early_years')" alt="Early Years classroom"
                          class="w-full h-full object-cover"
                          onerror="this.style.display='none'"/>
                 </div>

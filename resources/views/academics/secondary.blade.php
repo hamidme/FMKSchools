@@ -38,7 +38,7 @@
             {{-- JSS --}}
             <div class="bg-zinc-50 border border-zinc-100 rounded-3xl overflow-hidden">
                 <div class="aspect-video bg-[#2D2B8F]/10 overflow-hidden">
-                    <img src="/images/programmes/junior-secondary.webp" alt="Junior Secondary"
+                    <img src="@siteImage('programme_junior_secondary')" alt="Junior Secondary"
                          class="w-full h-full object-cover"
                          onerror="this.style.display='none'"/>
                 </div>
@@ -63,7 +63,7 @@
             {{-- SSS --}}
             <div class="bg-[#1a1950] rounded-3xl overflow-hidden">
                 <div class="aspect-video bg-[#2D2B8F] overflow-hidden">
-                    <img src="/images/programmes/senior-secondary.webp" alt="Senior Secondary"
+                    <img src="@siteImage('programme_senior_secondary')" alt="Senior Secondary"
                          class="w-full h-full object-cover opacity-80"
                          onerror="this.style.display='none'"/>
                 </div>

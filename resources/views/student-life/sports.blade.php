@@ -47,7 +47,7 @@
             </div>
             <div class="relative">
                 <div class="rounded-3xl overflow-hidden aspect-[4/3] bg-emerald-50 shadow-xl">
-                    <img src="/images/facilities/sports.webp" alt="FMKS Sports"
+                    <img src="@siteImage('facility_sports')" alt="FMKS Sports"
                          class="w-full h-full object-cover"
                          onerror="this.style.display='none'"/>
                 </div>

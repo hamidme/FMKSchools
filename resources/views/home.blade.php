@@ -324,18 +324,18 @@
 
             <div class="grid grid-cols-2 gap-4">
                 <div class="rounded-3xl overflow-hidden aspect-[3/4] bg-[#2D2B8F]/10">
-                    <img src="/images/about-main.webp"
+                    <img src="@siteImage('home_about_main')"
                          alt="Students at FMKS"
                          class="w-full h-full object-cover"/>
                 </div>
                 <div class="flex flex-col gap-4 pt-8">
                     <div class="rounded-3xl overflow-hidden aspect-square bg-[#F5C518]/15">
-                        <img src="/images/about-award.webp"
+                        <img src="@siteImage('home_about_award')"
                              alt="FMKS award ceremony"
                              class="w-full h-full object-cover"/>
                     </div>
                     <div class="rounded-3xl overflow-hidden aspect-square bg-[#CC1F1F]/10">
-                        <img src="/images/about-grad.webp"
+                        <img src="@siteImage('home_about_grad')"
                              alt="FMKS graduation"
                              class="w-full h-full object-cover"/>
                     </div>
@@ -385,7 +385,7 @@
             <div class="flex justify-center lg:justify-end">
                 <div class="relative w-72 sm:w-80 lg:w-full max-w-sm">
                     <div class="rounded-3xl overflow-hidden aspect-[3/4] bg-[#2D2B8F] shadow-2xl">
-                        <img src="/images/principal.webp"
+                        <img src="@siteImage('principal')"
                              alt="FMKS Principal"
                              class="w-full h-full object-cover object-top"
                              onerror="this.style.display='none'"
@@ -427,7 +427,7 @@
         >
             {{-- Left: photo --}}
             <div class="hidden sm:block w-[42%] flex-shrink-0 bg-[#2D2B8F]">
-                <img src="/images/principal.webp"
+                <img src="@siteImage('principal')"
                      alt="FMKS Principal"
                      class="w-full h-full object-cover object-top"
                      onerror="this.style.display='none'"
@@ -499,7 +499,7 @@
                 {{-- colour-coded accent bar --}}
                 <div class="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-sky-400 to-blue-500 z-10"></div>
                 {{-- background image — swap placeholder gradient when photo is ready --}}
-                <img src="/images/programmes/early-years.webp" alt="Early Years programme"
+                <img src="@siteImage('programme_early_years')" alt="Early Years programme"
                      class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                      onerror="this.style.display='none'"
                 />
@@ -535,7 +535,7 @@
             <a href="/academics/primary"
                class="group relative h-[420px] rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 hover:-translate-y-1">
                 <div class="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-emerald-400 to-green-500 z-10"></div>
-                <img src="/images/programmes/primary.webp" alt="Primary School programme"
+                <img src="@siteImage('programme_primary')" alt="Primary School programme"
                      class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                      onerror="this.style.display='none'"
                 />
@@ -567,7 +567,7 @@
             <a href="/academics/secondary"
                class="group relative h-[420px] rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 hover:-translate-y-1">
                 <div class="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-amber-400 to-yellow-500 z-10"></div>
-                <img src="/images/programmes/junior-secondary.webp" alt="Junior Secondary programme"
+                <img src="@siteImage('programme_junior_secondary')" alt="Junior Secondary programme"
                      class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                      onerror="this.style.display='none'"
                 />
@@ -599,7 +599,7 @@
             <a href="/academics/secondary"
                class="group relative h-[420px] rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 hover:-translate-y-1">
                 <div class="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-rose-500 to-[#CC1F1F] z-10"></div>
-                <img src="/images/programmes/senior-secondary.webp" alt="Senior Secondary programme"
+                <img src="@siteImage('programme_senior_secondary')" alt="Senior Secondary programme"
                      class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                      onerror="this.style.display='none'"
                 />
@@ -637,7 +637,7 @@
 ══════════════════════════════════════════════════════ --}}
 {{-- background-attachment:fixed creates the parallax — cards scroll over the pinned image --}}
 <section class="relative py-24"
-         style="background-image: url('/images/why-fmks.webp'); background-attachment: fixed; background-size: cover; background-position: center;">
+         style="background-image: url('@siteImage('home_why_fmks')'); background-attachment: fixed; background-size: cover; background-position: center;">
     {{-- Deep purple overlay --}}
     <div class="absolute inset-0 bg-[#000]/60"></div>
     {{-- subtle grid texture --}}
@@ -773,7 +773,7 @@
             {{-- The large border-radius on the left creates the circular curve like the reference design --}}
             <div class="absolute inset-0 overflow-hidden"
                  style="border-top-left-radius: 55%; border-bottom-left-radius: 55%;">
-                <img src="/images/admissions-cta.webp"
+                <img src="@siteImage('home_admissions_cta')"
                      alt="Happy FMKS students"
                      class="w-full h-full object-cover object-center"
                      onerror="this.style.display='none'"

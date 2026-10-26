@@ -48,7 +48,7 @@
             </div>
             <div class="relative">
                 <div class="rounded-3xl overflow-hidden aspect-[4/3] bg-[#2D2B8F]/10 shadow-xl">
-                    <img src="/images/about/curriculum.webp" alt="Learning at FMKS"
+                    <img src="@siteImage('curriculum')" alt="Learning at FMKS"
                          class="w-full h-full object-cover"
                          onerror="this.style.display='none'"/>
                 </div>

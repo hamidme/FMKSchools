@@ -44,7 +44,7 @@
 
             <div class="group bg-white rounded-3xl overflow-hidden border border-zinc-100 shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
                 <div class="aspect-video bg-[#2D2B8F]/10 overflow-hidden">
-                    <img src="/images/facilities/classrooms.webp" alt="Classrooms"
+                    <img src="@siteImage('facility_classrooms')" alt="Classrooms"
                          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                          onerror="this.style.display='none'"/>
                 </div>
@@ -56,7 +56,7 @@
 
             <div class="group bg-white rounded-3xl overflow-hidden border border-zinc-100 shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
                 <div class="aspect-video bg-sky-50 overflow-hidden">
-                    <img src="/images/facilities/science-lab.webp" alt="Science Laboratory"
+                    <img src="@siteImage('facility_science_lab')" alt="Science Laboratory"
                          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                          onerror="this.style.display='none'"/>
                 </div>
@@ -68,7 +68,7 @@
 
             <div class="group bg-white rounded-3xl overflow-hidden border border-zinc-100 shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
                 <div class="aspect-video bg-amber-50 overflow-hidden">
-                    <img src="/images/facilities/library.webp" alt="Library"
+                    <img src="@siteImage('facility_library')" alt="Library"
                          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                          onerror="this.style.display='none'"/>
                 </div>
@@ -80,7 +80,7 @@
 
             <div class="group bg-white rounded-3xl overflow-hidden border border-zinc-100 shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
                 <div class="aspect-video bg-emerald-50 overflow-hidden">
-                    <img src="/images/facilities/ict-centre.webp" alt="ICT Centre"
+                    <img src="@siteImage('facility_ict_centre')" alt="ICT Centre"
                          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                          onerror="this.style.display='none'"/>
                 </div>
@@ -92,7 +92,7 @@
 
             <div class="group bg-white rounded-3xl overflow-hidden border border-zinc-100 shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
                 <div class="aspect-video bg-rose-50 overflow-hidden">
-                    <img src="/images/facilities/sports.webp" alt="Sports Facilities"
+                    <img src="@siteImage('facility_sports')" alt="Sports Facilities"
                          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                          onerror="this.style.display='none'"/>
                 </div>
@@ -104,7 +104,7 @@
 
             <div class="group bg-white rounded-3xl overflow-hidden border border-zinc-100 shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
                 <div class="aspect-video bg-purple-50 overflow-hidden">
-                    <img src="/images/facilities/assembly-hall.webp" alt="Assembly Hall"
+                    <img src="@siteImage('facility_assembly_hall')" alt="Assembly Hall"
                          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                          onerror="this.style.display='none'"/>
                 </div>
