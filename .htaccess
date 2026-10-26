@@ -2,7 +2,16 @@ DirectoryIndex index.php index.html
 Options -Indexes
 RewriteEngine On
 
-# Route static files that exist in /public directly
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
+# The whole Laravel project lives in public_html on this host, so only
+# public/ may ever be served. Anything else here (database/, storage/logs,
+# composer.json, ...) must never be reachable by URL, even if it exists.
+
+# Old/accidental /public/... URLs → the real address. THE_REQUEST is the
+# original request line, so this doesn't fire on the internal rewrite below.
+RewriteCond %{THE_REQUEST} \s/public/([^\s?]*) [NC]
+RewriteRule ^ /%1 [R=301,L]
+
+# Everything else is served from public/ (whose own .htaccess hands
+# non-file requests to Laravel).
+RewriteCond %{REQUEST_URI} !^/public/
 RewriteRule ^(.*)$ public/$1 [L,QSA]
